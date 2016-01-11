@@ -5,6 +5,9 @@ og:
 ---
 
 <div class="pure-g index">
+  <div class="pure-u-24-24">
+    <h1>Last</h1>
+  </div>
   {% for i in (0..11) %}
     {% assign post = site.posts[i] %}
     <div class="pure-u-12-24 pure-u-sm-8-24 pure-u-md-6-24 index-item">
@@ -21,29 +24,73 @@ og:
     </div>
   {% endfor %}
 
+  <div class="date-picker-menu-wr">
+    <div class="pure-u-24-24">
+      <h1>Archive</h1>
+    </div>
+    <!-- <button>
+      <i class="fa fa-times hidden" data-action="hideMenu"></i>
+      <i class="fa fa-bars" data-action="showMenu"></i>
+    </button> -->
+    <div class="date-picker-menu">
+      <ul class="archive-date-picker">
+        <li id="allSelect">Clear</li>
+      <ul class="archive-date-picker">
+        <li id="yearSelect" date-select-year='2015'>2015</li>
+        <li id="yearSelect" date-select-year='2016'>2016</li>
+      </ul>
+      <ul class="archive-date-picker">
+        <li id="monthSelect" date-select-month='01'>01</li>
+        <li id="monthSelect" date-select-month='02'>02</li>
+        <li id="monthSelect" date-select-month='03'>03</li>
+        <li id="monthSelect" date-select-month='04'>04</li>
+        <li id="monthSelect" date-select-month='05'>05</li>
+        <li id="monthSelect" date-select-month='06'>06</li>
+        <li id="monthSelect" date-select-month='07'>07</li>
+        <li id="monthSelect" date-select-month='08'>08</li>
+        <li id="monthSelect" date-select-month='09'>09</li>
+        <li id="monthSelect" date-select-month='10'>10</li>
+        <li id="monthSelect" date-select-month='11'>11</li>
+        <li id="monthSelect" date-select-month='12'>12</li>
+      </ul>
+    </div>
+  </div>
+
   <div class="pure-u-24-24 full">
-    {% assign prv_m = "13" %}
-    {% for post in site.posts %}
-      {% assign cur_m = post.date | date: "%m" %}
-      {% unless cur_m == prv_m %}
-        <div class="divider"></div>
-      {% endunless %}
-      <div class="item">
-        <div class="left">
-          <div class="title">
-            <a href="{{ post.url }}">{{ post.title }}</a>
+    <ul class="archive">
+      {% assign prv_m = "13" %}
+      {% for post in site.posts %}
+        {% assign cur_m = post.date | date: "%m" %}
+        {% unless cur_m == prv_m %}
+        {% endunless %}
+        <li data-item-year="{{ post.date | date: "%Y" }}" data-item-month="{{ post.date | date: "%m" }}">
+          <a href="{{post.url}}">
+            {{ post.title }}
+            <span class="date">
+              {{ post.date | date: "%d.%m. %Y" }}
+            </span>
+          </a>
+        </li>
+        <!-- <div class="item">
+          <div class="left">
+            <div class="title">
+              <a href="{{ post.url }}">{{ post.title }}</a>
+            </div>
+            <div class="month-year">
+              {{ post.date | date: "%Y" }} {{ post.date | date: "%m" }}
+            </div>
           </div>
-          <div class="month-year">
-            {{ post.date | date: "%Y" }} {{ post.date | date: "%m" }}
+          <div class="right">
+            <div class="day">
+              {{ post.date | date: "%d" }}
+            </div>
           </div>
-        </div>
-        <div class="right">
-          <div class="day">
-            {{ post.date | date: "%d" }}
-          </div>
-        </div>
-      </div>
-      {% assign prv_m = cur_m %}
-    {% endfor %}
+        </div> -->
+
+        {% assign prv_m = cur_m %}
+      {% endfor %}
+    </ul>
+
+
   </div>
 </div>
