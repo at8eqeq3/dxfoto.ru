@@ -196,3 +196,7 @@ blockquote p:last-child:before {
 blockquote p:last-child:after {
   content: none;
 }
+
+h1 small {
+  color: #7f7f7f;
+}
