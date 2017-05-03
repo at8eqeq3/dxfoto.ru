@@ -2,7 +2,6 @@ language: ruby
 cache: bundler
 rvm:
 - 2.2
-bundler_args: --full-index
 script:
 - bundle exec jekyll build -I
 branches:
