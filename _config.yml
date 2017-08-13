@@ -12,4 +12,4 @@ exclude:
   - vendor
 kramdown:
   smart_quotes:   ldquo,rdquo,laquo,raquo
-gems: [aws-sdk]
+plugins: [aws-sdk]
