@@ -2,6 +2,10 @@ language: ruby
 cache: bundler
 rvm:
 - 2.2
+before-install:
+- sudo apt-get install -y awscli
+before_script:
+- aws s3 sync s3://meta-dxfoto-ru _data
 script:
 - bundle exec jekyll build -I
 branches:
