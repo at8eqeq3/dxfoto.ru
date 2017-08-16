@@ -2,7 +2,7 @@ language: ruby
 cache: bundler
 rvm:
 - 2.2
-before-install:
+install:
 - sudo pip install awscli
 #addons:
 #  apt:
