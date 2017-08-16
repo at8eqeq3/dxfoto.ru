@@ -1,16 +1,16 @@
 language: ruby
-cache: bundler
+cache:
+  bundler: true
+  pip: true
+  directories:
+  - _site
 rvm:
 - 2.2
 install:
-- sudo pip install awscli
+- pip install awscli
 - bundle install
-#addons:
-#  apt:
-#    packages:
-#    - awscli
 before_script:
-- aws s3 sync s3://meta-dxfoto-ru _data --quiet
+- aws s3 sync s3://meta-dxfoto-ru _data --quiet --exclude "logs/*"
 script:
 - bundle exec jekyll build -I
 branches:
