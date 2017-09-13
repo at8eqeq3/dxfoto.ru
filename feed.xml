@@ -21,7 +21,7 @@ layout: null
         <guid isPermaLink="true">{{ post.url | prepend: site.baseurl | prepend: site.url }}</guid>
         <pubDate>{{ post.date | date_to_rfc822 }}</pubDate>
         <category>Фотографии</category>
-        <author>hires@dxfoto.ru ({{ post.author }})</author>
+        <author>{{ post.author }} / dxfoto.ru</author>
         <media:rating scheme="urn:simple">nonadult</media:rating>
         <media:content type="image/jpeg"
                        medium="image"
@@ -34,7 +34,14 @@ layout: null
 {{ post.content | markdownify | strip_html | xml_escape }}
         ]]></description>
         <content:encoded><![CDATA[
-{{ post.content | markdownify }}
+          <figure>
+            <img src="http://img.dxfoto.ru/m/{{post.date | date: "%Y"}}/{{post.date | date: "%m"}}/{{post.date | date: "%Y-%m-%d"}}.jpg" />
+            <figcaption>
+              {{ post.title | xml_escape }}
+              <span class="copyright">{{ post.author }} / dxfoto.ru</span>
+            </figcaption>
+          </figure>
+          {{ post.content | markdownify }}
         ]]></content:encoded>
       </item>
     {% endfor %}
