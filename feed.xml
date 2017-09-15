@@ -38,7 +38,7 @@ layout: null
             <img src="http://img.dxfoto.ru/m/{{post.date | date: "%Y"}}/{{post.date | date: "%m"}}/{{post.date | date: "%Y-%m-%d"}}.jpg" />
             <figcaption>
               {{ post.title | xml_escape }}
-              <span class="copyright">CC-BY {{ post.author }} / dxfoto.ru</span>
+              <span class="copyright">(CC-BY {{ post.author }} / dxfoto.ru)</span>
             </figcaption>
           </figure>
           {{ post.content | markdownify }}
