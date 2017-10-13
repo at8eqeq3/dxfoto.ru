@@ -145,6 +145,22 @@ a {
 }
 .index .full .divider {
   margin: 32px 2em 8px 2em;
+  text-align: center;
+}
+
+.index .full .divider a {
+  padding: 0 8px 0 8px;
+  vertical-align: top;
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
+.index .full .divider:before {
+  content: url('ruler-left.png');
+}
+
+.index .full .divider:after {
+  content: url('ruler-right.png');
 }
 
 .tag {
@@ -195,6 +211,12 @@ blockquote p:last-child:before {
 }
 blockquote p:last-child:after {
   content: none;
+}
+
+.meta hr {
+  height: 22px;
+  background: url(/ruler.png) no-repeat center;
+  border: none;
 }
 
 h1 small {

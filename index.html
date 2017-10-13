@@ -25,7 +25,7 @@ og:
     {% for post in site.posts %}
       {% assign cur_m = post.date | date: "%m" %}
       {% unless cur_m == prv_m %}
-        <div class="divider"><i class="fa fa-calendar"></i>&emsp;<a href="/{{ post.date | date: "%Y" }}/{{ post.date | date: "%m" }}">Архив за {{ post.date | date: "%Y" }}.{{ post.date | date: "%m" }}</a></div>
+        <div class="divider"><a href="/{{ post.date | date: "%Y" }}/{{ post.date | date: "%m" }}/index.html">Архив за {{ post.date | date: "%Y" }}.{{ post.date | date: "%m" }}</a></div>
       {% endunless %}
       <div class="item">
         <div class="left">
