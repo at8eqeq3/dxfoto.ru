@@ -1,0 +1,6 @@
+﻿platform: Linux 4.13.8-1-default #1 SMP PREEMPT Wed Oct 18 09:53:30 UTC 2017 (569e26e) x86_64
+version: 2.5.9.1088
+[22:52:14.049] VerifyFileWithHash failed on file /home/dmitry/workspace/dxfoto-ppd/dxfoto/.sync/settings.dat with status 2.
+[22:52:14.049] VerifyFileWithHash failed on file /home/dmitry/workspace/dxfoto-ppd/dxfoto/.sync/settings.dat with status 2.
+[22:52:14.049] VerifyFileWithHash failed on file /home/dmitry/workspace/dxfoto-ppd/dxfoto/.sync/settings.dat with status 2.
+[20171025 22:52:14.050] ZIP: Can't locate [version] in zip, error -100.
