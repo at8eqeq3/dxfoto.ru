@@ -222,3 +222,11 @@ blockquote p:last-child:after {
 h1 small {
   color: #7f7f7f;
 }
+
+.tag .gear:after {
+  content: ", ";
+}
+
+.tag .gear:last-child:after {
+  content: none;
+}

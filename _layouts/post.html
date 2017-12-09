@@ -93,7 +93,13 @@ layout: default
         </span>
         <span class="tag" itemprop="dateCreated" dateTime="{{ page.shoot_date }}"><i class="fa fa-calendar"></i>{{ page.shoot_date }}</span>
         <span class="tag" itemprop="creator"><i class="fa fa-user"></i>{{ page.author }}</span>
-        <span class="tag"><i class="fa fa-camera"></i>{{ page.gear }}</span>
+        <span class="tag">
+          <i class="fa fa-camera"></i>
+          {% for gear in page.gear %}
+            {% assign g = site.data.gear[gear] %}
+            <abbr class="gear" title="{{ g.name }}">{{ gear }}</abbr>
+          {% endfor %}
+        </span>
 
         {% if exif %}
           <span class="tag"><i class="fa fa-cogs"></i>f/{{ exif['Aperture'] }} {{ exif['ShutterSpeed'] }}s ISO{{ exif['ISO'] }} {{ exif['FocalLength'] }}</span>
