@@ -16,6 +16,10 @@ exclude:
   - package.json
   - README.md
   - s3_website.yml
+  - sitemap.xml
+  - feed.xml
 kramdown:
   smart_quotes:   ldquo,rdquo,laquo,raquo
 plugins: [aws-sdk]
+destination: ./_amp
+layouts_dir: _layouts-amp
