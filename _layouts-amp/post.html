@@ -1,0 +1,76 @@
+---
+layout: default
+---
+{% assign y = page.date | date: '%Y' %}
+{% assign m = page.date | date: '%m' %}
+{% assign d = page.date | date: '%Y-%m-%d' %}
+{% assign exif = site.data.exif[y][m][d] %}
+{% if exif['ImageWidth'] %}
+  {% assign fw = exif['ImageWidth'] %}
+  {% assign fh = exif['ImageHeight'] %}
+  {% assign lw = 2048 %}
+  {% assign lh = fh | times: lw | divided_by: fw %}
+{% else %}
+  {% assign lw = 2048 %}
+  {% assign lh = 1536 %}
+{% endif %}
+<h1>{{ page.title }}&emsp;<small>(#{{ page.index }})</small></h1>
+<amp-img src="{% img_src l %}" alt="{{ page.title }}" width="{{ lw }}" height="{{ lh }}" layout="responsive"></amp-img>
+{{ content }}
+<div class="meta">
+  <span class="author"><i class="material-icons md-18">face</i> {{ page.author }}</span>
+  <span class="date"><i class="material-icons md-18">today</i> {{ page.shoot_date }}</span>
+  <span class="gear">
+    <i class="material-icons md-18">photo_camera</i>
+    {% for gear in page.gear %}
+      {% assign g = site.data.gear[gear] %}
+      <span>{{ g.name }}</span>
+    {% endfor %}
+  </span>
+  {% if exif %}
+    <span class="tech"><i class="material-icons md-18">camera</i> f/{{ exif['Aperture'] }} {{ exif['ShutterSpeed'] }}s ISO{{ exif['ISO'] }} {{ exif['FocalLength'] }}</span>
+  {% endif %}
+</div>
+<div class="links">
+  {% if page.previous %}
+    <div><i class="material-icons md-18">chevron_left</i> <a href="{{ page.previous.url }}">{{ page.previous.date | date: "%Y %m %d" }} &mdash; {{ page.previous.title }}</a></div>
+  {% endif %}
+  {% if page.next %}
+    <div><i class="material-icons md-18">chevron_right</i> <a href="{{ page.next.url }}">{{ page.next.date | date: "%Y %m %d" }} &mdash; {{ page.next.title }}</a></div>
+  {% endif %}
+</div>
+<script type="application/ld+json">
+  {
+    "@context" : "http://schema.org",
+    "@type" : "Article",
+    "name" : "{{ page.title }}",
+    "datePublished" : "{{ page.date | date_to_xmlschema }}",
+    "image": {
+      "@type": "ImageObject",
+      "url": "{% img_src l %}",
+      "height": {{ lh }},
+      "width": {{ lw }}
+    },
+    "articleBody" : "{{ page.content | strip_html | strip_newlines }}",
+    "headline" : "{{ page.title }}",
+    "author": {
+      "@type": "Person",
+      "name": "{{ page.author }}"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "dxfoto.ru",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://www.dxfoto.ru/logo_60.jpg",
+        "width": 194,
+        "height": 60
+      }
+    },
+    "mainEntityOfPage":{
+      "@type":"WebPage",
+      "@id":"{{ site.url }}{{ page.url }}"
+    },
+    "dateModified": "{{ page.date | date_to_xmlschema }}"
+  }
+</script>

@@ -1,0 +1,25 @@
+---
+layout: default
+type: archive
+og:
+  exclude: 'yes'
+---
+<!-- latest 10 -->
+{% for i in (0..11) %}
+  {% assign post = site.posts[i] %}
+  <a href="{{ post.url }}" title="{{post.date | date: "%Y %m %d" }} • {{ post.title }}">
+    <amp-img src="https://img.dxfoto.ru/s/{{post.date | date: "%Y"}}/{{post.date | date: "%m"}}/{{post.date | date: "%Y-%m-%d"}}.jpg" alt="{{ post.title }}" width="512" height="512" layout="responsive"></amp-img>
+  </a>
+{% endfor %}
+<!-- others -->
+{% assign prv_m = "13" %}
+{% for post in site.posts %}
+  {% assign cur_m = post.date | date: "%m" %}
+  {% unless cur_m == prv_m %}
+    <div class="divider"><i class="material-icons md-18">collections</i> <a href="/{{ post.date | date: "%Y" }}/{{ post.date | date: "%m" }}/index.html">Архив за {{ post.date | date: "%Y" }}.{{ post.date | date: "%m" }}</a></div>
+  {% endunless %}
+  <div class="links">
+    <div><i class="material-icons md-18">photo</i> <a href="{{ post.url }}">{{ post.date | date: "%Y %m %d" }} &mdash; {{ post.title }}</a></div>
+  </div>
+  {% assign prv_m = cur_m %}
+{% endfor %}

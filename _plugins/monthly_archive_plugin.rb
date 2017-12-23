@@ -57,17 +57,28 @@ module Jekyll
       @layout =  site.config['monthly_archive'] && site.config['monthly_archive']['layout'] || 'monthly_archive'
       self.ext = '.html'
       self.basename = 'index'
-      self.content = <<-EOS
-{% for post in page.posts %}
-  <div class="pure-u-12-24 pure-u-sm-8-24 pure-u-md-6-24 index-item">
+      if ENV['AMP'] == 'yes'
+        self.content = <<-EOS
+  {% for post in page.posts %}
     <a href="{{ post.url }}" title="{{post.date | date: "%Y %m %d" }} • {{ post.title }}">
-      <img src="https://img.dxfoto.ru/s/{{post.date | date: "%Y"}}/{{post.date | date: "%m"}}/{{post.date | date: "%Y-%m-%d"}}.jpg" alt="{{ post.title }}" class="pure-img" />
+      <amp-img src="https://img.dxfoto.ru/s/{{post.date | date: "%Y"}}/{{post.date | date: "%m"}}/{{post.date | date: "%Y-%m-%d"}}.jpg" alt="{{ post.title }}" width="512" height="512" layout="responsive"></amp-img>
     </a>
-  </div>
-{% endfor %}
-      EOS
+  {% endfor %}
+        EOS
+      else
+        self.content = <<-EOS
+  {% for post in page.posts %}
+    <div class="pure-u-12-24 pure-u-sm-8-24 pure-u-md-6-24 index-item">
+      <a href="{{ post.url }}" title="{{post.date | date: "%Y %m %d" }} • {{ post.title }}">
+        <img src="https://img.dxfoto.ru/s/{{post.date | date: "%Y"}}/{{post.date | date: "%m"}}/{{post.date | date: "%Y-%m-%d"}}.jpg" alt="{{ post.title }}" class="pure-img" />
+      </a>
+    </div>
+  {% endfor %}
+        EOS
+      end
       self.data = {
         'layout' => @layout,
+        'og' => { 'exclude' => 'yes' },
         'type' => 'archive',
         'title' => "Архив за #{@year}.#{@month}",
         'posts' => posts,

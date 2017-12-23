@@ -16,6 +16,8 @@ exclude:
   - package.json
   - README.md
   - s3_website.yml
+  - index-amp.html
+  - error-amp.html
 kramdown:
   smart_quotes:   ldquo,rdquo,laquo,raquo
 plugins: [aws-sdk]

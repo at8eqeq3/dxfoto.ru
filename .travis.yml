@@ -13,12 +13,14 @@ before_script:
 - aws s3 sync s3://meta-dxfoto-ru _data --quiet --exclude "logs/*"
 script:
 - bundle exec jekyll build -I
-- bundle exec jekyll build -I --config _config-amp.yml
+- AMP=yes bundle exec jekyll build -I --config _config-amp.yml
 branches:
   only:
   - deploy-aerobatic
 after_success:
   - bundle exec s3_website push
+  - mv -f _amp/index-amp.html _amp/index.html
+  - mv -f _amp/error-amp.html _amp/error.html
   - AMP=yes bundle exec s3_website push
 #  - rm -f .gitignore && touch .gitignore
 #  - git config --global user.name "Travis CI"

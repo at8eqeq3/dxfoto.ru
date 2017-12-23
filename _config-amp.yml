@@ -18,6 +18,13 @@ exclude:
   - s3_website.yml
   - sitemap.xml
   - feed.xml
+  - index.html
+  - error.html
+  - error.png
+  - stub.png
+  - ruler.png
+  - ruler-left.png
+  - ruler-right.png
 kramdown:
   smart_quotes:   ldquo,rdquo,laquo,raquo
 plugins: [aws-sdk]

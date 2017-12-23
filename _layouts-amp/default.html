@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html amp lang="ru">
+  <head>
+    <meta charset="utf-8">
+    <title>
+      {% if page.title %}
+        {% unless page.type == 'archive' %}
+          {{ page.date | date: "%Y %m %d" }} •
+        {% endunless %}
+        {{ page.title }} •
+      {% endif %}
+      {{ site.title }}
+    </title>
+    <link rel="canonical" href="https://www.dxfoto.ru/{{ page.url }}">
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+    <script async custom-element="amp-analytics" src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
+    {% unless page.type == 'archive' %}
+      {% include og.html %}
+    {% endunless %}
+    <link href="https://fonts.googleapis.com/css?family=Fira+Sans:400,300,300italic,400italic,700,700italic&subset=latin,cyrillic" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style amp-custom>
+      body {
+        width: auto;
+        margin: 0;
+        padding: 0;
+        font-family: 'Fira Sans', sans-serif;
+      }
+      header {
+        background-color: #667654;
+        padding: 10px;
+        text-align: center;
+      }
+      h1 small {
+        font-size: 0.8em;
+        color: #454545;
+      }
+      a {
+        color: #b25d5d;
+      }
+      .meta {
+        font-size: 0.9em;
+        color: #343434;
+        padding-top: 8px;
+        padding-bottom: 8px;
+        margin-top: 8px;
+        margin-bottom: 8px;
+        border-top: 1px solid #454545;
+        border-bottom: 1px solid #454545;
+      }
+      .meta span {
+        margin-right: 16px;
+      }
+      i.material-icons {
+        vertical-align: middle;
+      }
+      .gear span:after {
+        content: ", ";
+      }
+
+      .gear span:last-child:after {
+        content: none;
+      }
+      footer {
+        background-color: #b25d5d;
+        color: #f0f0f0;
+        font-size: 0.8em;
+      }
+      footer a {
+        color: #c0c0c0;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <amp-img src="/logo_60.png" width="194" height="60" alt="dxfoto.ru logo" layout="fixed"></amp-img>
+    </header>
+    {{ content }}
+    <footer>
+      <p><strong>dxfoto.ru – ежедневная картинка</strong>. Дарим по картинке в день из наших архивов.</p>
+      <p>Если не указано иное, все картинки распространяются на условиях лицензии
+        <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution (CC-BY)</a>.
+        Если вам нужны картинки в исходном качестве &mdash; пишите на <em>hires [at] dxfoto [dot] ru</em>.</p>
+      <p>Версия для AMP. Открыть <a href="https://www.dxfoto.ru/{{ page.url }}">полную версию</a>.
+    </footer>
+    <!-- ga -->
+    <amp-analytics type="googleanalytics">
+      <script type="application/json">
+      {
+        "vars": {
+          "account": "UA-3768603-1"
+        },
+        "triggers": {
+          "default pageview": {
+            "on": "visible",
+            "request": "pageview",
+            "vars": {
+              "title": "{{ page.title }}"
+            }
+          }
+        }
+      }
+      </script>
+    </amp-analytics>
+    <!-- metrika -->
+    <amp-analytics type="metrika">
+      <script type="application/json">
+      {
+        "vars": {
+          "counterId": "156723"
+        }
+      }
+      </script>
+    </amp-analytics>
+  </body>
+</html>
