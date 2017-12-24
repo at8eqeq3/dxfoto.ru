@@ -18,6 +18,9 @@ layout: null
     <yandex:analytics id="156723"
                       type="Yandex">
     </yandex:analytics>
+    <yandex:analytics id="UA-3768603-1"
+                      type="Google">
+    </yandex:analytics>
     <atom:link href="{{ "/feed.xml" | prepend: site.baseurl | prepend: site.url }}" rel="self" type="application/rss+xml"/>
     {% for post in site.posts limit:10 %}
       <item turbo="true">
@@ -59,6 +62,14 @@ layout: null
           <img src="http://img.dxfoto.ru/m/{{post.date | date: "%Y"}}/{{post.date | date: "%m"}}/{{post.date | date: "%Y-%m-%d"}}.jpg" />
           {{ post.content | markdownify }}
           <small>(CC-BY {{ post.author }} / dxfoto.ru)</small>
+          <yandex:related>
+            {% if post.previous %}
+              <link url="{{ post.previous.url }}" img="http://img.dxfoto.ru/s/{{post.previous.date | date: "%Y"}}/{{post.previous.date | date: "%m"}}/{{post.previous.date | date: "%Y-%m-%d"}}.jpg">{{ post.previous.date | date: "%Y %m %d" }} – {{ post.previous.title }}</link>
+            {% endif %}
+            {% if post.next %}
+              <link url="{{ post.next.url }}" img="http://img.dxfoto.ru/s/{{post.next.date | date: "%Y"}}/{{post.next.date | date: "%m"}}/{{post.next.date | date: "%Y-%m-%d"}}.jpg">{{ post.next.date | date: "%Y %m %d" }} – {{ post.next.title }}</link>
+            {% endif %}
+          </yandex:related>
         ]]></turbo:content>
       </item>
     {% endfor %}
