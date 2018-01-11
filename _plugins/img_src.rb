@@ -20,7 +20,7 @@ module Jekyll
       url_part = page_date.strftime('%Y/%m/%Y-%m-%d')
       ### XXX temporary check, remove when images migration is complete
       # thres is a date of first photo in S3
-      thres = Time.new(2016, 02, 17)
+      thres = Time.new(2016, 1, 31)
       if page_date >= thres
         case size
         when 'l'
