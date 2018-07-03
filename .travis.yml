@@ -5,7 +5,7 @@ cache:
   directories:
   - _site
 rvm:
-- 2.2
+- 2.4
 install:
 - pip install --user awscli
 - bundle install
