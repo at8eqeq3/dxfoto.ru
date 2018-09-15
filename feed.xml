@@ -15,7 +15,7 @@ layout: null
     <link>{{ site.url }}{{ site.baseurl }}/</link>
     <generator>Jekyll v{{ jekyll.version }}</generator>
     <language>ru</language>
-    <yandex:analytics id="156723"
+    <yandex:analytics id="50351305"
                       type="Yandex">
     </yandex:analytics>
     <yandex:analytics id="UA-3768603-1"
