@@ -53,24 +53,25 @@ layout: null
         ]]></content:encoded>
         <turbo:content><![CDATA[
           <header>
-            <figure>
-              <img src="https://www.dxfoto.ru/logo.png" />
-            </figure>
-            <h1>dxfoto.ru</h1>
+            <h1>{{ post.title | xml_escape }}</h1>
           </header>
-          <h2>{{ post.title | xml_escape }}</h2>
-          <img src="http://img.dxfoto.ru/m/{{post.date | date: "%Y"}}/{{post.date | date: "%m"}}/{{post.date | date: "%Y-%m-%d"}}.jpg" />
+          <figure>
+            <img src="http://img.dxfoto.ru/m/{{post.date | date: "%Y"}}/{{post.date | date: "%m"}}/{{post.date | date: "%Y-%m-%d"}}.jpg" />
+            <figcaption>
+              {{ post.title | xml_escape }}
+              <span class="copyright">(CC-BY {{ post.author }} / dxfoto.ru)</span>
+            </figcaption>
+          </figure>
           {{ post.content | markdownify }}
-          <small>(CC-BY {{ post.author }} / dxfoto.ru)</small>
-          <yandex:related>
-            {% if post.previous %}
-              <link url="{{ post.previous.url }}" img="http://img.dxfoto.ru/s/{{post.previous.date | date: "%Y"}}/{{post.previous.date | date: "%m"}}/{{post.previous.date | date: "%Y-%m-%d"}}.jpg">{{ post.previous.date | date: "%Y %m %d" }} – {{ post.previous.title }}</link>
-            {% endif %}
-            {% if post.next %}
-              <link url="{{ post.next.url }}" img="http://img.dxfoto.ru/s/{{post.next.date | date: "%Y"}}/{{post.next.date | date: "%m"}}/{{post.next.date | date: "%Y-%m-%d"}}.jpg">{{ post.next.date | date: "%Y %m %d" }} – {{ post.next.title }}</link>
-            {% endif %}
-          </yandex:related>
         ]]></turbo:content>
+        <yandex:related>
+          {% if post.previous %}
+            <link url="{{ post.previous.url }}" img="http://img.dxfoto.ru/s/{{post.previous.date | date: "%Y"}}/{{post.previous.date | date: "%m"}}/{{post.previous.date | date: "%Y-%m-%d"}}.jpg">{{ post.previous.date | date: "%Y %m %d" }} – {{ post.previous.title }}</link>
+          {% endif %}
+          {% if post.next %}
+            <link url="{{ post.next.url }}" img="http://img.dxfoto.ru/s/{{post.next.date | date: "%Y"}}/{{post.next.date | date: "%m"}}/{{post.next.date | date: "%Y-%m-%d"}}.jpg">{{ post.next.date | date: "%Y %m %d" }} – {{ post.next.title }}</link>
+          {% endif %}
+        </yandex:related>
       </item>
     {% endfor %}
   </channel>
