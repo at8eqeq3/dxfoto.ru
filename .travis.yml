@@ -4,6 +4,7 @@ cache:
   pip: true
   directories:
   - _site
+  - _amp
 rvm:
 - 2.4
 install:
