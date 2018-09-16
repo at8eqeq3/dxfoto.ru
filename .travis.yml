@@ -23,7 +23,7 @@ after_success:
   - mv -f _amp/index-amp.html _amp/index.html
   - mv -f _amp/error-amp.html _amp/error.html
   - AMP=yes bundle exec s3_website push
-  - curl -X POST "https://api.cloudflare.com/client/v4/zones/$CF_ZONE_ID/purge_cache" -H "X-Auth-Email\: $CF_AUTH_EMAIL" -H "X-Auth-Key: $CF_API_KEY" -H "Content-Type: application/json" --data '{"files": ["https://www.dxfoto.ru/", "https://amp.dxfoto.ru/"]}'
+  - sh purge.sh
 #  - rm -f .gitignore && touch .gitignore
 #  - git config --global user.name "Travis CI"
 #  - git config --global user.email "nobody@nowhere.org"
