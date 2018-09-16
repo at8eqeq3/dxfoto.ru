@@ -18,6 +18,7 @@ exclude:
   - s3_website.yml
   - index-amp.html
   - error-amp.html
+  - purge.sh
 kramdown:
   smart_quotes:   ldquo,rdquo,laquo,raquo
 plugins: [aws-sdk]

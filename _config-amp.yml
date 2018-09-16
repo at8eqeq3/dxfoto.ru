@@ -25,6 +25,7 @@ exclude:
   - ruler.png
   - ruler-left.png
   - ruler-right.png
+  - purge.sh
 kramdown:
   smart_quotes:   ldquo,rdquo,laquo,raquo
 plugins: [aws-sdk]
