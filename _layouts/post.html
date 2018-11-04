@@ -105,6 +105,7 @@ layout: default
           <span class="tag"><i class="fa fa-cogs"></i>f/{{ exif['Aperture'] }} {{ exif['ShutterSpeed'] }}s ISO{{ exif['ISO'] }} {{ exif['FocalLength'] }}</span>
         {% endif %}
         <!-- tags -->
+        <!--
         {% assign tags = site.data.tags[y][m][d]['results'][0]['tags'] %}
         {% if tags %}
           <hr />
@@ -118,6 +119,7 @@ layout: default
             <span class="tag" style="filter: opacity({{ 100 | plus: tag['confidence'] | divided_by: 2 }}%)">{{ tag['tag'] }}</span>
           </div>
         {% endif %}
+        -->
         {% assign tags = page.tags %}
         {% if tags.size > 0 %}
           <hr />
