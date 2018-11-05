@@ -6,13 +6,6 @@ layout: default
 {% assign d = page.date | date: '%Y-%m-%d' %}
 {% assign exif = site.data.exif[y][m][d] %}
 {% assign colors = site.data.colors[y][m][d] %}
-{% if colors['best_guess_background'] %}
-  {% assign bgcolor = colors['best_guess_background'] %}
-{% elsif colors['results'][0]['info']['background_colors'][0]['html_code'] %}
-  {% assign bgcolor = colors['results'][0]['info']['background_colors'][0]['html_code'] %}
-{% else %}
-  {% assign bgcolor = "#ffffff" %}
-{% endif %}
 {% if exif['ImageWidth'] %}
   {% assign fw = exif['ImageWidth'] %}
   {% assign fh = exif['ImageHeight'] %}
