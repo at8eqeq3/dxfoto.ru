@@ -5,7 +5,6 @@ layout: default
 {% assign m = page.date | date: '%m' %}
 {% assign d = page.date | date: '%Y-%m-%d' %}
 {% assign exif = site.data.exif[y][m][d] %}
-{% assign colors = site.data.colors[y][m][d] %}
 <div itemscope itemtype="http://schema.org/Photograph">
   <div class="pure-g links">
     <div class="pure-u-7-24 left">
@@ -54,30 +53,32 @@ layout: default
       <div itemprop="description">{{ content }}</div>
       <div class="meta tags">
         <hr />
-        <span itemprop="contentLocation" itemscope itemtype="http://schema.org/Place">
-          {% if exif['GPSPosition'] %}
-            <span class="tag" itemprop="name"><i class="fa fa-map-marker"></i><a href="https://www.google.ru/maps/place/{{ exif['GPSPosition'] | coord_format }}" itemprop="url">{{ page.location }}</a></span>
-            <span itemprop="geo" itemscope itemtype="http://schema.org/GeoCoordinates" />
-              <meta itemprop="latitude" content="{{ exif['GPSLatitude'] | dms2deg }}" />
-              <meta itemprop="longitude" content="{{ exif['GPSLongitude'] | dms2deg }}" />
-            </span>
-          {% else %}
-            <span class="tag" itemprop="name"><i class="fa fa-map-marker"></i>{{ page.location }}</span>
-          {% endif %}
-        </span>
-        <span class="tag" itemprop="dateCreated" dateTime="{{ page.shoot_date }}"><i class="fa fa-calendar"></i>{{ page.shoot_date }}</span>
-        <span class="tag" itemprop="creator"><i class="fa fa-user"></i>{{ page.author }}</span>
-        <span class="tag">
-          <i class="fa fa-camera"></i>
-          {% for gear in page.gear %}
-            {% assign g = site.data.gear[gear] %}
-            <abbr class="gear" title="{{ g.name }}">{{ gear }}</abbr>
-          {% endfor %}
-        </span>
+        <div>
+          <span itemprop="contentLocation" itemscope itemtype="http://schema.org/Place">
+            {% if exif['GPSPosition'] %}
+              <span class="tag" itemprop="name"><i class="fa fa-map-marker"></i><a href="https://www.google.ru/maps/place/{{ exif['GPSPosition'] | coord_format }}" itemprop="url">{{ page.location }}</a></span>
+              <span itemprop="geo" itemscope itemtype="http://schema.org/GeoCoordinates" />
+                <meta itemprop="latitude" content="{{ exif['GPSLatitude'] | dms2deg }}" />
+                <meta itemprop="longitude" content="{{ exif['GPSLongitude'] | dms2deg }}" />
+              </span>
+            {% else %}
+              <span class="tag" itemprop="name"><i class="fa fa-map-marker"></i>{{ page.location }}</span>
+            {% endif %}
+          </span>
+          <span class="tag" itemprop="dateCreated" dateTime="{{ page.shoot_date }}"><i class="fa fa-calendar"></i>{{ page.shoot_date }}</span>
+          <span class="tag" itemprop="creator"><i class="fa fa-user"></i>{{ page.author }}</span>
+          <span class="tag">
+            <i class="fa fa-camera"></i>
+            {% for gear in page.gear %}
+              {% assign g = site.data.gear[gear] %}
+              <abbr class="gear" title="{{ g.name }}">{{ gear }}</abbr>
+            {% endfor %}
+          </span>
 
-        {% if exif %}
-          <span class="tag"><i class="fa fa-cogs"></i>f/{{ exif['Aperture'] }} {{ exif['ShutterSpeed'] }}s ISO{{ exif['ISO'] }} {{ exif['FocalLength'] }}</span>
-        {% endif %}
+          {% if exif %}
+            <span class="tag"><i class="fa fa-cogs"></i>f/{{ exif['Aperture'] }} {{ exif['ShutterSpeed'] }}s ISO{{ exif['ISO'] }} {{ exif['FocalLength'] }}</span>
+          {% endif %}
+        </div>
         <!-- tags -->
         <!--
         {% assign tags = site.data.tags[y][m][d]['results'][0]['tags'] %}
@@ -94,44 +95,47 @@ layout: default
           </div>
         {% endif %}
         -->
-        {% assign tags = page.tags %}
-        {% if tags.size > 0 %}
-          <hr />
-          {% assign tag_count = tags | size | minus: 1 %}
-          <div class="tags" itemprop="keywords">
-            <i class="fa fa-tags"></i>
-            {% for tag in tags limit:tag_count %}
-              <span class="tag">{{ tag }},</span>
+        <div>
+          {% assign tags = page.tags %}
+          {% if tags.size > 0 %}
+            <!-- <hr /> -->
+            {% assign tag_count = tags | size | minus: 1 %}
+            <div class="tags" itemprop="keywords">
+              <i class="fa fa-tags"></i>
+              {% for tag in tags limit:tag_count %}
+                <span class="tag">{{ tag }},</span>
+              {% endfor %}
+              {% assign tag = tags | last %}
+              <span class="tag">{{ tag }}</span>
+            </div>
+          {% endif %}
+        </div>
+        {% if page.links %}
+          <!-- <hr /> -->
+          <div>
+            {% for link in page.links %}
+              <i class="fa fa-link"></i>
+              <b>{{ link.info }}</b>:
+              <a href="{{ link.href }}" class="" itemprop="sameAs">
+                {% if link.title %}
+                  {{ link.title }}
+                {% else %}
+                  {{ link.href }}
+                {% endif %}
+              </a>
+              <br />
             {% endfor %}
-            {% assign tag = tags | last %}
-            <span class="tag">{{ tag }}</span>
           </div>
         {% endif %}
-        {% if page.links %}
-          <hr />
-          <ul>
-            {% for link in page.links %}
-              <li>
-                <i class="fa fa-link"></i>
-                <b>{{ link.info }}</b>:
-                <a href="{{ link.href }}" class="" itemprop="sameAs">
-                  {% if link.title %}
-                    {{ link.title }}
-                  {% else %}
-                    {{ link.href }}
-                  {% endif %}
-                </a>
-              </li><br />
-            {% endfor %}
-          </ul>
-        {% endif %}
-        <hr />
-        <i class="fa fa-cloud-download"></i> Скачать:
-        <a href="{% img_src f %}">Исходный ({% image_size f %})*</a> |
-        <a href="{% img_src l %}">{% image_size l %}</a> |
-        <a href="{% img_src m %}">{% image_size m %}</a> |
-        <a href="{% img_src s %}">{% image_size s %}</a> |
-        <p><small>* "исходный" тут значит "такой, какой загружен в CDN", это не всегда соответствует наибольшему существующему размеру картинки.</small></p>
+        <!-- <hr /> -->
+        <div>
+          <i class="fa fa-cloud-download"></i> Скачать:
+          <a href="{% img_src f %}">Исходный ({% image_size f %})*</a> |
+          <a href="{% img_src l %}">{% image_size l %}</a> |
+          <a href="{% img_src m %}">{% image_size m %}</a> |
+          <a href="{% img_src s %}">{% image_size s %}</a> |
+          <p><small>* "исходный" тут значит "такой, какой загружен в CDN", это не всегда соответствует наибольшему существующему размеру картинки.</small></p>
+        </div>
       </div>
     </div>
     <div class="pure-u-md-6-24 pure-u-1"> </div>
@@ -146,8 +150,6 @@ layout: default
     "image": {
       "@type": "ImageObject",
       "url": "{% img_src m %}",
-      "height": {{ mh }},
-      "width": {{ mw }}
     },
     "articleBody" : "{{ page.content | strip_html | strip_newlines }}",
     "headline" : "{{ page.title }}",

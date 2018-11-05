@@ -8,7 +8,6 @@ module Jekyll
     end
 
     def render(context)
-      puts @text
       return unless context.registers.key? :page
       page_date = context.registers[:page]['date']
       y = page_date.strftime('%Y')

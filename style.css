@@ -63,8 +63,8 @@ a {
 .meta {
   font-size: 0.9em;
 }
-.meta ul {
-  list-style-type: none;
+.meta div {
+  margin-bottom: 1em;
 }
 .meta ul li {
   display: inline-block;
