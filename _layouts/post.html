@@ -149,7 +149,7 @@ layout: default
     "datePublished" : "{{ page.date | date_to_xmlschema }}",
     "image": {
       "@type": "ImageObject",
-      "url": "{% img_src m %}",
+      "url": "{% img_src m %}"
     },
     "articleBody" : "{{ page.content | strip_html | strip_newlines }}",
     "headline" : "{{ page.title }}",
