@@ -38,6 +38,7 @@ layout: null
         <pubDate>{{ post.date | date_to_rfc822 }}</pubDate>
         <category>Фотографии</category>
         <author>{{ post.author }}</author>
+        <dc:creator>{{ post.author }} / dxfoto.ru</dc:creator>
         <media:rating scheme="urn:simple">nonadult</media:rating>
         <media:content type="image/jpeg"
                        medium="image"
