@@ -49,7 +49,7 @@ layout: default
   <div class="pure-g text">
     <div class="pure-u-md-6-24 pure-u-1"> </div>
     <div class="pure-u-md-12-24 pure-u-1">
-      <h1><span itemprop="name">{{ page.title }}</span>&emsp;<small>(#{{ page.index }})</small></h1>
+      <h1><span itemprop="headline">{{ page.title }}</span>&emsp;<small itemprop="identifier">(#{{ page.index }})</small></h1>
       <div itemprop="description">{{ content }}</div>
       <div class="meta tags">
         <hr />
@@ -57,7 +57,7 @@ layout: default
           <span itemprop="contentLocation" itemscope itemtype="http://schema.org/Place">
             {% if exif['GPSPosition'] %}
               <span class="tag" itemprop="name"><i class="fa fa-map-marker"></i><a href="https://www.google.ru/maps/place/{{ exif['GPSPosition'] | coord_format }}" itemprop="url">{{ page.location }}</a></span>
-              <span itemprop="geo" itemscope itemtype="http://schema.org/GeoCoordinates" />
+              <span itemprop="geo" itemscope itemtype="http://schema.org/GeoCoordinates">
                 <meta itemprop="latitude" content="{{ exif['GPSLatitude'] | dms2deg }}" />
                 <meta itemprop="longitude" content="{{ exif['GPSLongitude'] | dms2deg }}" />
               </span>
@@ -76,7 +76,7 @@ layout: default
           </span>
 
           {% if exif %}
-            <span class="tag"><i class="fa fa-cogs"></i>f/{{ exif['Aperture'] }} {{ exif['ShutterSpeed'] }}s ISO{{ exif['ISO'] }} {{ exif['FocalLength'] }}</span>
+            <span class="tag" itemprop="exifData"><i class="fa fa-cogs"></i>f/{{ exif['Aperture'] }} {{ exif['ShutterSpeed'] }}s ISO{{ exif['ISO'] }} {{ exif['FocalLength'] }}</span>
           {% endif %}
         </div>
         <!-- tags -->
@@ -128,10 +128,10 @@ layout: default
           </div>
         {% endif %}
         <!-- <hr /> -->
-        <div>
+        <div itemscope itemtype="http://schema.org/ImageObject">
           <i class="fa fa-cloud-download"></i> Скачать:
           <a href="{% img_src f %}">Исходный ({% image_size f %})*</a> |
-          <a href="{% img_src l %}">{% image_size l %}</a> |
+          <a itemprop="contentUrl" href="{% img_src l %}">{% image_size l %}</a> |
           <a href="{% img_src m %}">{% image_size m %}</a> |
           <a href="{% img_src s %}">{% image_size s %}</a> |
           <p><small>* "исходный" тут значит "такой, какой загружен в CDN", это не всегда соответствует наибольшему существующему размеру картинки.</small></p>
