@@ -8,7 +8,7 @@ cache:
 rvm:
 - 2.4
 install:
-- pip install --upgrade --user awscli
+- pip3 install --upgrade --user awscli
 - bundle install
 before_script:
 - aws s3 sync s3://meta-dxfoto-ru _data --quiet --exclude "logs/*"
