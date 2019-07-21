@@ -11,7 +11,7 @@ python:
   - "3.6"
 install:
 - pip install --upgrade --user awscli
-- pip install docutils==0.14
+- pip install --user docutils==0.14
 - bundle install
 before_script:
 - aws s3 sync s3://meta-dxfoto-ru _data --quiet --exclude "logs/*"
