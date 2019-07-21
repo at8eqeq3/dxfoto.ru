@@ -6,7 +6,9 @@ cache:
   - _site
   - _amp
 rvm:
-- 2.4
+  - 2.4
+python:
+  - "3.6"
 install:
 - pip install --upgrade --user awscli
 - bundle install
