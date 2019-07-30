@@ -9,6 +9,8 @@ rvm:
   - 2.4
 python:
   - "3.6"
+jdk:
+  - openjdk8
 install:
 - pip install --upgrade --user awscli
 - pip install --user docutils==0.14
