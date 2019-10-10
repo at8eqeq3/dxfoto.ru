@@ -18,6 +18,7 @@ exclude:
   - s3_website.yml
   - index-amp.html
   - error-amp.html
+  - robots-amp.txt
   - purge.sh
 kramdown:
   smart_quotes:   ldquo,rdquo,laquo,raquo
