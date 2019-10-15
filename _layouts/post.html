@@ -143,20 +143,20 @@ layout: default
 </div>
 <script type="application/ld+json">
   {
-    "@context" : "http://schema.org",
-    "@type" : "Article",
-    "name" : "{{ page.title }}",
-    "datePublished" : "{{ page.date | date_to_xmlschema }}",
+    "@context": "http://schema.org",
+    "@type": "BlogPosting",
+    "@id": "{{ site.url }}{{ page.url }}",
+    "datePublished": "{{ page.date | date_to_xmlschema }}",
+    "dateModified": "{{ page.date | date_to_xmlschema }}",
+    "name": "{{ page.title }}",
+    "headline": "{{ page.title }}",
+    "text": "{{ page.content | strip_html | strip_newlines }}",
+    "author": { "@type": "Person", "name": "{{ page.author }} / dxfoto.ru" },
+    "url": "{{ site.url }}{{ page.url }}",
     "image": {
       "@type": "ImageObject",
       "url": "{% img_src m %}"
-    },
-    "articleBody" : "{{ page.content | strip_html | strip_newlines }}",
-    "headline" : "{{ page.title }}",
-    "author": {
-      "@type": "Person",
-      "name": "{{ page.author }}"
-    },
+    }
     "publisher": {
       "@type": "Organization",
       "name": "dxfoto.ru",
@@ -170,8 +170,7 @@ layout: default
     "mainEntityOfPage":{
       "@type":"WebPage",
       "@id":"{{ site.url }}{{ page.url }}"
-    },
-    "dateModified": "{{ page.date | date_to_xmlschema }}"
+    }
   }
 </script>
 <script type="text/javascript">
