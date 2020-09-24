@@ -1,0 +1,12 @@
+cc0:
+  icon: fa-creative-commons-zero
+  title: Public Domain
+  link: https://creativecommons.org/publicdomain/zero/1.0/
+ccby:
+  icon: fa-creative-commons-by
+  title: Creative Commons Attribution
+  link: https://creativecommons.org/licenses/by/4.0/
+unsplash:
+  icon: fa-unsplash
+  title: Unsplash license
+  link: https://unsplash.com/license

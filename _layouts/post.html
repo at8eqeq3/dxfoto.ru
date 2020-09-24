@@ -110,6 +110,15 @@ layout: default
             </div>
           {% endif %}
         </div>
+
+        {% if page.license %}
+          {% assign license = site.data.licenses[page.license] %}
+          <div class="tags">
+            <i class="fab {{ license.icon }}"></i>
+            <a href="{{ license.link }}" class="tag">{{ license.title }}</a>
+          </div>
+        {% endif %}
+
         {% if page.links %}
           <!-- <hr /> -->
           <div>
