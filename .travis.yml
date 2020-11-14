@@ -6,11 +6,11 @@ cache:
   - _site
   - _amp
 rvm:
-  - 2.5
+- 2.5
 python:
-  - "3.6"
+- '3.6'
 jdk:
-  - openjdk8
+- openjdk8
 install:
 - pip install --upgrade --user awscli
 - pip install --user docutils==0.14
@@ -24,27 +24,13 @@ branches:
   only:
   - deploy-aerobatic
 after_success:
-# - bundle exec s3_website push
-  - bundle exec s3_website install
-  - java -cp $(bundle show s3_website)/*.jar s3.website.Push
-  - mv -f _amp/index-amp.html _amp/index.html
-  - mv -f _amp/error-amp.html _amp/error.html
-  - mv -f _amp/robots-amp.txt _amp/robots.txt
-# - AMP=yes bundle exec s3_website push
-  - AMP=yes java -cp $(bundle show s3_website)/*.jar s3.website.Push
-  - sh purge.sh
-#  - rm -f .gitignore && touch .gitignore
-#  - git config --global user.name "Travis CI"
-#  - git config --global user.email "nobody@nowhere.org"
-#  - TRAVIS_COMMIT=$(git log --format=%B -n 1)
-#  - git add .
-#  - git commit -m "$TRAVIS_COMMIT"
-#deploy:
-#  provider: s3
-#  bucket: www.dxfoto.ru
-#  local-dir: _site
-#  acl: public_read
-#  region: eu-west-1
-#  on:
-#    repo: at8eqeq3/dxfoto.ru
-#    branch: deploy-aerobatic
+- bundle exec s3_website install
+- java -cp $(bundle show s3_website)/*.jar s3.website.Push
+- mv -f _amp/index-amp.html _amp/index.html
+- mv -f _amp/error-amp.html _amp/error.html
+- mv -f _amp/robots-amp.txt _amp/robots.txt
+- AMP=yes java -cp $(bundle show s3_website)/*.jar s3.website.Push
+- sh purge.sh
+notifications:
+  slack:
+    secure: aJEACoibamhGXoWfa6b/K6E/m/PkVh+/9AYA5iW+GNzeraYL28YENpZ+4k1cyik/NA/79dCrNElgsmUb94pXGBh4a/y4UsThhPGFhjFbOm3ttHoO+v4sAk+ul/4BlPTkPXBncAbAtS5vRuDP+9i0Zw5j8IAdS3h+xG6ZFXTfj/p5GOH7ZRrAB2Y5Zga94Rsd+o5XLpPlDlXbmB3bn3ppO46hco8zKDaLnfoyAPQ6IuexHc2Pke9CtpeDg8c+aqDhulgl1pFsaedJ5hxLE6P9zOVuZ9ieU3hqFE94Tlr6IBbPsG55wX0rHQtfWuf54wrPU7h62bcDxy4h88wcMzTAPXme/TJAK2uQVmPbgs4q08jflDeQHDRMXlShKw7juWSfk7iRKu7l+zlFi+1arymxvYZcNlXi2bhYfTjMifMYFffumEukkQU8+yFH7PfACe+mS9rKdmKjH4wGrAZ8r+c6UASeLG/IaIFJPy2SRUjiT5jw4To9LHXXxK6SRHmZHI9QUWfz+f3O5pRdoE63+n6mReIMjKmZhPCVCg9synBjODPfBDZ3SActMFgPJZzzSLU1+3ccfrK/UOd3WIZz2R7U/ckcqSSbHsq9WKh6PDSXfOa2G1D47ve5qRTnnKSaRKGh6iM6HuIlFX+MlJwe+KAY32xIKHwhzxM5w+eXhZ09vzg=
