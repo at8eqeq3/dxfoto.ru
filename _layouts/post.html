@@ -39,11 +39,34 @@ layout: default
       </style>
     {% endif %}
     {% if exif['ImageWidth'] %}
-      <div class="pure-u-1 colored-wrapper checkers" style="padding-bottom: {% prop_calc %}; background-color: {{ bgcolor }}">
+      <div class="pure-u-1 colored-wrapper checkers" style="padding-bottom: {% prop_calc %}; background-color: {{ bgcolor }}; position: relative;">
     {% else %}
-      <div class="pure-u-1 checkers">
+      <div class="pure-u-1 checkers" style="position: relative;">
     {% endif %}
       <img itemprop="image" src="{% img_src l %}" class="pure-img" alt="{{ page.title }}" />
+      {% if page.previous %}
+        <a class="img-nav img-nav-previous" href="{{ page.previous.url }}"></a>
+      {% endif %}
+      {% if page.next %}
+        <a class="img-nav img-nav-next" href="{{ page.next.url }}"></a>
+      {% endif %}
+      <style>
+.img-nav {
+  display: block;
+  position: absolute;
+  top: 0;
+  width: 25%;
+  height: 100%;
+  background: transparent;
+  z-index: 8888;
+}
+.img-nav-previous {
+  left: 0;
+}
+.img-nav-next {
+  right: 0;
+}
+      </style>
     </div>
   </div>
   <div class="pure-g text">
