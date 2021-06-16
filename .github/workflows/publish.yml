@@ -16,6 +16,8 @@ jobs:
         with:
           ruby-version: 3.0
           bundler-cache: true
+      - name: Sync metadata
+        run: aws s3 sync s3://meta-dxfoto-ru _data --quiet --exclude "logs/*"
       - name: Build main site
         run: bundle exec jekyll build -I
       - uses: jakejarvis/s3-sync-action@master
