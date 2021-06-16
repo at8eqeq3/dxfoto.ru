@@ -24,17 +24,11 @@ GEM
       execjs
     coffee-script-source (1.11.1)
     colorator (1.1.0)
-    colored (1.2)
     commonmarker (0.17.13)
       ruby-enum (~> 0.5)
     concurrent-ruby (1.1.9)
-    configure-s3-website (2.3.0)
-      aws-sdk (~> 2)
-      deep_merge (~> 1.0.0)
-    deep_merge (1.0.1)
     dnsruby (1.61.5)
       simpleidn (~> 0.1)
-    dotenv (1.0.2)
     em-websocket (0.5.2)
       eventmachine (>= 0.12.9)
       http_parser.rb (~> 0.6.0)
@@ -256,11 +250,6 @@ GEM
       i18n
     ruby2_keywords (0.0.4)
     rubyzip (2.3.0)
-    s3_website (3.4.0)
-      colored (= 1.2)
-      configure-s3-website (= 2.3.0)
-      dotenv (~> 1.0)
-      thor (~> 0.18)
     safe_yaml (1.0.5)
     sass (3.7.4)
       sass-listen (~> 4.0.0)
@@ -274,7 +263,6 @@ GEM
       unf (~> 0.1.4)
     terminal-table (1.8.0)
       unicode-display_width (~> 1.1, >= 1.1.1)
-    thor (0.20.3)
     thread_safe (0.3.6)
     typhoeus (1.4.0)
       ethon (>= 0.9.0)
@@ -292,7 +280,6 @@ PLATFORMS
 DEPENDENCIES
   aws-sdk (~> 2)
   github-pages (= 215)
-  s3_website
 
 BUNDLED WITH
    1.16.6
