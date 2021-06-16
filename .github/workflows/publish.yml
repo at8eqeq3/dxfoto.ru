@@ -1,0 +1,51 @@
+name: Ruby
+
+on:
+  push:
+    branches: [ deploy-aerobatic ]
+  pull_request:
+    branches: [ deploy-aerobatic ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.0
+          bundler-cache: true
+      - name: Build main site
+        run: bundle exec jekyll build -I
+      - uses: jakejarvis/s3-sync-action@master
+        with:
+          args: --acl public-read --follow-symlinks --delete
+        env:
+          AWS_S3_BUCKET: www.dxfoto.ru
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_REGION: 'eu-central-1'
+          SOURCE_DIR: '_site'
+      - name: Build AMP site
+        env:
+          AMP: yes
+        run: AMP=yes bundle exec jekyll build -I --config _config-amp.yml
+        run: mv -f _amp/index-amp.html _amp/index.html
+        run: mv -f _amp/error-amp.html _amp/error.html
+        run: mv -f _amp/robots-amp.txt _amp/robots.txt
+      - uses: jakejarvis/s3-sync-action@master
+        with:
+          args: --acl public-read --follow-symlinks --delete
+        env:
+          AWS_S3_BUCKET: amp.dxfoto.ru
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_REGION: 'eu-central-1'
+          SOURCE_DIR: '_amp'
+      - name: Purge CF cache
+        env:
+          CF_ZONE_ID: ${{ secrets.CF_ZONE_ID }}
+          CF_AUTH_EMAIL: at8eqeq3@yandex.ru
+          CF_API_KEY: ${{ secrets.CF_API_KEY }}
+        run: sh purge.sh
