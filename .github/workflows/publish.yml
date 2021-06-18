@@ -46,8 +46,8 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       - name: Cache HTMLs
         uses: actions/cache@v2
-        key: cachedata
         with:
+          key: cachedata
           path: |
             _site
             _amp
