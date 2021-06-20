@@ -16,10 +16,15 @@ jobs:
         with:
           ruby-version: 3.0
           bundler-cache: true
+      - name: Get date and time
+        id: get-datetime
+        run: |
+          echo "::set-output name=datetime::$(/bin/date -u "+%Y%m%d%H%M")"
+    shell: bash
       - name: Setup build cache
         uses: actions/cache@v2
         with:
-          key: cachedata
+          key: cachedata-${{ steps.get-datetime.outputs.datetime }}
           path: |
             _site
             _amp
