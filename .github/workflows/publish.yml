@@ -20,7 +20,7 @@ jobs:
         id: get-datetime
         run: |
           echo "::set-output name=datetime::$(/bin/date -u "+%Y%m%d%H%M")"
-    shell: bash
+        shell: bash
       - name: Setup build cache
         uses: actions/cache@v2
         with:
