@@ -29,6 +29,8 @@ jobs:
             _site
             _amp
             _data
+          restore-keys: |
+            cachedata-
       - name: Sync metadata
         env:
           AWS_EC2_METADATA_DISABLED: true
