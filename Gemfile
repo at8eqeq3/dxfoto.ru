@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 # require 'open-uri'
 
 gem 'aws-sdk', '~> 2'
-gem 'jekyll'
+gem 'jekyll', '~> 4'
 gem 'kramdown-parser-gfm'
 # gem 'github-pages', '215'
 # gem 's3_website'
