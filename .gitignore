@@ -6,6 +6,7 @@ _data/jobs/*
 _data/tags/*
 _amp
 .jekyll-metadata
+.jekyll-cache/*
 .vscode/*
 .bundle/*
 vendor/*
