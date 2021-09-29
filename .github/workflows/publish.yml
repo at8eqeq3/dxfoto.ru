@@ -29,6 +29,7 @@ jobs:
             _site
             _amp
             _data
+            .jekyll-cache
           restore-keys: |
             cachedata-
       - name: Sync metadata
