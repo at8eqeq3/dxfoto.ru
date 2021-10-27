@@ -1,5 +1,6 @@
 # from http://stackoverflow.com/questions/26073090/how-to-retrieve-the-current-post-index-number-in-jekyll
 module Jekyll
+  # Adds serial number to each post
   class PostIndex < Generator
     safe true
     priority :low

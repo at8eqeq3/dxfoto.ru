@@ -41,11 +41,14 @@ jobs:
       - name: Build main site
         run: bundle exec jekyll build -I
       - name: Sync main site
-        run: aws s3 sync _site s3://www.dxfoto.ru --quiet
+        run: |
+          aws s3 sync _site s3://www.dxfoto.ru --quiet
+          aws s3api put-object --bucket img.dxfoto.ru --key today.jpg --website-redirect-location $(<today)
         env:
           AWS_EC2_METADATA_DISABLED: true
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
       - name: Build AMP site
         env:
           AMP: yes
