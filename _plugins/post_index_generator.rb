@@ -6,6 +6,7 @@ module Jekyll
     priority :low
     def generate(site)
       site.posts.docs.each_with_index do |item, index|
+        puts "#{index}: #{item}"
         item.data['index'] = index + 1
       end
     end
