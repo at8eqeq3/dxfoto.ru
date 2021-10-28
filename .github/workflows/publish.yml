@@ -44,6 +44,7 @@ jobs:
         run: |
           aws s3 sync _site s3://www.dxfoto.ru --quiet
           aws s3api put-object --bucket img.dxfoto.ru --key today.jpg --website-redirect-location $(<today)
+          aws s3api put-object-acl --bucket img.dxfoto.ru --key today.jpg --acl public-read
         env:
           AWS_EC2_METADATA_DISABLED: true
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
