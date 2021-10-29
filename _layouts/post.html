@@ -9,17 +9,17 @@ layout: default
   <div class="pure-g links">
     <div class="pure-u-7-24 left">
       {% if page.previous %}
-        <a href="{{ page.previous.url }}"><i class="fa fa-arrow-left"></i><span class="sm-hide"> {{ page.previous.date | date: "%Y %m %d" }}</span></a>
+        <a href="{{ page.previous.url }}"><i class="fa fa-arrow-left"></i><span class="sm-hide"> {{ page.previous.date | date: "%Y-%m-%d" }}</span></a>
       {% else %}
         <a href="#"><i class="fa fa-times"></i></a>
       {% endif %}
     </div>
     <div class="pure-u-10-24 center">
-      <strong><time itemprop="datePublished" datetime="{{ page.date | date: "%Y-%m-%d" }}">{{ page.date | date: "%Y %m %d" }}</time></strong>
+      <strong><time itemprop="datePublished" datetime="{{ page.date | date: "%Y-%m-%d" }}">{{ page.date | date: "%Y-%m-%d" }}</time></strong>
     </div>
     <div class="pure-u-7-24 right">
       {% if page.next %}
-        <a href="{{ page.next.url }}"><span class="sm-hide">{{ page.next.date | date: "%Y %m %d" }} </span><i class="fa fa-arrow-right"></i></a>
+        <a href="{{ page.next.url }}"><span class="sm-hide">{{ page.next.date | date: "%Y-%m-%d" }} </span><i class="fa fa-arrow-right"></i></a>
       {% else %}
         <a href="#"><i class="fa fa-times"></i></a>
       {% endif %}
@@ -78,15 +78,7 @@ layout: default
         <hr />
         <div>
           <span itemprop="contentLocation" itemscope itemtype="http://schema.org/Place">
-            {% if exif['GPSPosition'] %}
-              <span class="tag" itemprop="name"><i class="fa fa-map-marker"></i><a href="https://www.google.ru/maps/place/{{ exif['GPSPosition'] | coord_format }}" itemprop="url">{{ page.location }}</a></span>
-              <span itemprop="geo" itemscope itemtype="http://schema.org/GeoCoordinates">
-                <meta itemprop="latitude" content="{{ exif['GPSLatitude'] | dms2deg }}" />
-                <meta itemprop="longitude" content="{{ exif['GPSLongitude'] | dms2deg }}" />
-              </span>
-            {% else %}
-              <span class="tag" itemprop="name"><i class="fa fa-map-marker"></i>{{ page.location }}</span>
-            {% endif %}
+            <span class="tag" itemprop="name"><i class="fa fa-map-marker"></i>{{ page.location }}</span>
           </span>
           <span class="tag" itemprop="dateCreated" dateTime="{{ page.shoot_date }}"><i class="fa fa-calendar"></i>{{ page.shoot_date }}</span>
           <span class="tag" itemprop="creator"><i class="fa fa-user"></i>{{ page.author }}</span>
@@ -103,21 +95,6 @@ layout: default
           {% endif %}
         </div>
         <!-- tags -->
-        <!--
-        {% assign tags = site.data.tags[y][m][d]['results'][0]['tags'] %}
-        {% if tags %}
-          <hr />
-          {% assign tag_count = tags | size | minus: 1 %}
-          <div class="tags" itemprop="keywords">
-            <i class="fa fa-tags"></i>
-            {% for tag in tags limit:tag_count %}
-              <span class="tag" style="filter: opacity({{ 100 | plus: tag['confidence'] | divided_by: 2 }}%)">{{ tag['tag'] }},</span>
-            {% endfor %}
-            {% assign tag = tags | last %}
-            <span class="tag" style="filter: opacity({{ 100 | plus: tag['confidence'] | divided_by: 2 }}%)">{{ tag['tag'] }}</span>
-          </div>
-        {% endif %}
-        -->
         <div>
           {% assign tags = page.tags %}
           {% if tags.size > 0 %}
