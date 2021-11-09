@@ -1,48 +1,28 @@
 module Jekyll
+  # Liquid tag to build an URL to image by post date
   class ImgSrcTag < Liquid::Tag
     def initialize(tag_name, text, tokens)
       super
       @text = text
-      size, date = @text.split(' ', 2)
+      _, date = @text.split(' ', 2)
       puts date.to_s unless date.strip == ''
       @tokens = tokens
     end
+
     def render(context)
-      size, date = @text.split(' ', 2)
+      s, d = @text.split(' ', 2)
       page_date = nil
-      if date.to_s.match(/\d{4}-\d{2}-\d{2}/)
+      if d =~ /\d{4}-\d{2}-\d{2}/
         page_date = date
-      else
-        page_date = context.registers[:page]['date'] if context.registers.key? :page\
+      elsif context.registers.key? :page
+        page_date = context.registers[:page]['date']
       end
       return if page_date.nil?
 
-      url_part = page_date.strftime('%Y/%m/%Y-%m-%d')
-      ### XXX temporary check, remove when images migration is complete
-      # thres is a date of first photo in S3
-      thres = Time.new(2016, 1, 31)
-      if page_date >= thres
-        case size
-        when 'l'
-          "https://img.dxfoto.ru/l/#{url_part}.jpg"
-        when 'm'
-          "https://img.dxfoto.ru/m/#{url_part}.jpg"
-        when 's'
-          "https://img.dxfoto.ru/s/#{url_part}.jpg"
-        else
-          "https://hd.dxfoto.ru/#{url_part}.jpg"
-        end
+      if %w[l m s].include? s
+        "https://img.dxfoto.ru/#{s}/#{page_date.strftime('%Y/%m/%Y-%m-%d')}.jpg"
       else
-        case size
-        when 'l'
-          "https://res.cloudinary.com/dxfoto-ru/t_large/#{url_part}.jpg"
-        when 'm'
-          "https://res.cloudinary.com/dxfoto-ru/t_medium/#{url_part}.jpg"
-        when 's'
-          "https://res.cloudinary.com/dxfoto-ru/t_small/#{url_part}.jpg"
-        else
-          "https://res.cloudinary.com/dxfoto-ru/#{url_part}.jpg"
-        end
+        "https://hd.dxfoto.ru/#{page_date.strftime('%Y/%m/%Y-%m-%d')}.jpg"
       end
     end
   end
