@@ -17,11 +17,15 @@ E-3:
 Зенитар:
   name: KMZ MC Zenitar-M 2.8/16 Fish-eye
 Индустар 50-2:
-  name: KMZ Industar-50-2 3.5/50
+  name: КМЗ Индустар-50-2 3.5/50
 Гелиос 44-2:
-  name: KMZ Helios-44-2 2/58
+  name: КМЗ Гелиос-44-2 2/58
 Таир-3:
   name: KMZ Tair 3-PhS 4.5/300
+Индустар 61:
+  name: ЛОМЗ Индустар 61-Л/З-МС 2.8/50
+EX-25:
+  name: Olympus Digital EX-25
 31mm ext:
   name: 31mm extender
 21mm ext:
