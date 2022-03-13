@@ -8,7 +8,7 @@ module Jekyll
       date = site.posts.docs[-1].data['date'].strftime('%Y/%m/%Y-%m-%d')
       data = <<-TODAY
 {
-  ErrorDocument": {
+  "ErrorDocument": {
     "Key": "index.html"
   },
   "IndexDocument": {
