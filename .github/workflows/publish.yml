@@ -35,20 +35,20 @@ jobs:
       - name: Sync metadata
         env:
           AWS_EC2_METADATA_DISABLED: true
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        run: aws s3 sync s3://meta-dxfoto-ru _data --quiet --exclude "logs/*"
+          AWS_ACCESS_KEY_ID: ${{ secrets.YC_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.YC_SECRET_ACCESS_KEY }}
+        run: aws --endpoint-url=https://storage.yandexcloud.net s3 sync s3://meta-dxfoto-ru _data --quiet --exclude "logs/*"
       - name: Build main site
         run: bundle exec jekyll build -I
       - name: Sync main site
         run: |
-          aws s3 sync _site s3://www.dxfoto.ru --quiet
-          aws s3api put-object --bucket img.dxfoto.ru --key today.jpg --website-redirect-location $(<today)
-          aws s3api put-object-acl --bucket img.dxfoto.ru --key today.jpg --acl public-read
+          aws --endpoint-url=https://storage.yandexcloud.net s3 sync _site s3://www.dxfoto.ru --quiet
+          aws --endpoint-url=https://storage.yandexcloud.net s3api put-object --bucket img.dxfoto.ru --key today.jpg --website-redirect-location $(<today)
+          aws --endpoint-url=https://storage.yandexcloud.net s3api put-object-acl --bucket img.dxfoto.ru --key today.jpg --acl public-read
         env:
           AWS_EC2_METADATA_DISABLED: true
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.YC_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.YC_SECRET_ACCESS_KEY }}
 
       - name: Build AMP site
         env:
@@ -59,11 +59,11 @@ jobs:
           mv -f _amp/error-amp.html _amp/error.html
           mv -f _amp/robots-amp.txt _amp/robots.txt
       - name: Sync AMP site
-        run: aws s3 sync _amp s3://amp.dxfoto.ru --quiet
+        run: aws --endpoint-url=https://storage.yandexcloud.net s3 sync _amp s3://amp.dxfoto.ru --quiet
         env:
           AWS_EC2_METADATA_DISABLED: true
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.YC_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.YC_SECRET_ACCESS_KEY }}
       - name: Purge CF cache
         env:
           CF_ZONE_ID: ${{ secrets.CF_ZONE_ID }}
