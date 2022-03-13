@@ -43,8 +43,7 @@ jobs:
       - name: Sync main site
         run: |
           aws --endpoint-url=https://storage.yandexcloud.net s3 sync _site s3://www.dxfoto.ru --quiet
-          aws --endpoint-url=https://storage.yandexcloud.net s3api put-object --bucket img.dxfoto.ru --key today.jpg --website-redirect-location $(<today)
-          aws --endpoint-url=https://storage.yandexcloud.net s3api put-object-acl --bucket img.dxfoto.ru --key today.jpg --acl public-read
+          aws --endpoint-url=https://storage.yandexcloud.net s3api put-bucket-website --bucket img.dxfoto.ru --website-configuration file://today.json
         env:
           AWS_EC2_METADATA_DISABLED: true
           AWS_ACCESS_KEY_ID: ${{ secrets.YC_ACCESS_KEY_ID }}

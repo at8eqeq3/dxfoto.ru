@@ -11,3 +11,4 @@ _amp
 .bundle/*
 vendor/*
 today
+today.json
