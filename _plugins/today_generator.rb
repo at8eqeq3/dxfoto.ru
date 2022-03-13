@@ -22,7 +22,7 @@ module Jekyll
       "Redirect": {
         "HostName": "img.dxfoto.ru",
         "HttpRedirectCode": "301",
-        "Protocol": https",
+        "Protocol": "https",
         "ReplaceKeyWith": "l/#{date}.jpg"
       }
     }
