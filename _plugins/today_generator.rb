@@ -7,24 +7,27 @@ module Jekyll
       today = File.new("#{__dir__}/../today.json", 'w')
       date = site.posts.docs[-1].data['date'].strftime('%Y/%m/%Y-%m-%d')
       data = <<-TODAY
-<WebsiteConfiguration xmlns="http://s3.amazonaws.com/doc/2006-03-01/">
-  <IndexDocument>
-    <Suffix>index.html</Suffix>
-  </IndexDocument>
-  <ErrorDocument>
-    <Key>error.html</Key>
-  </ErrorDocument>
-  <RoutingRules>
-    <RoutingRule>
-      <Condition>
-        <KeyPrefixEquals>today.jpg</KeyPrefixEquals>
-      </Condition>
-      <Redirect>
-        <ReplaceKeyPrefixWith>l/#{date}.jpg</ReplaceKeyPrefixWith>
-      </Redirect>
-    </RoutingRule>
-  </RoutingRules>
-</WebsiteConfiguration>
+{
+  ErrorDocument": {
+    "Key": "index.html"
+  },
+  "IndexDocument": {
+    "Suffix": "error.html"
+  },
+  "RoutingRules": [
+    {
+      "Condition": {
+        "KeyPrefixEquals": "today.jpg"
+      },
+      "Redirect": {
+        "HostName": "img.dxfoto.ru",
+        "HttpRedirectCode": "301",
+        "Protocol": https",
+        "ReplaceKeyWith": "l/#{date}.jpg"
+      }
+    }
+  ]
+}
       TODAY
       today.puts data
     end
