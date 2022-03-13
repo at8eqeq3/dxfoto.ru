@@ -28,7 +28,7 @@ jobs:
           path: |
             _site
             _amp
-            _data
+            _data/exif
             .jekyll-cache
           restore-keys: |
             cachedata-
