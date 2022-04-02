@@ -61,7 +61,9 @@ module Jekyll
         self.content = <<-EOS
   {% for post in page.posts %}
     <a href="{{ post.url }}" title="{{post.date | date: "%Y-%m-%d" }} • {{ post.title }}">
-      <amp-img src="https://img.dxfoto.ru/s/{{post.date | date: "%Y"}}/{{post.date | date: "%m"}}/{{post.date | date: "%Y-%m-%d"}}.webp" alt="{{ post.title }}" width="512" height="512" layout="responsive"></amp-img>
+      <amp-img src="https://img.dxfoto.ru/s/{{post.date | date: "%Y"}}/{{post.date | date: "%m"}}/{{post.date | date: "%Y-%m-%d"}}.webp" alt="{{ post.title }}" width="512" height="512" layout="responsive">
+        <amp-img fallback src="https://img.dxfoto.ru/s/{{post.date | date: "%Y"}}/{{post.date | date: "%m"}}/{{post.date | date: "%Y-%m-%d"}}.jpg" alt="{{ post.title }}" width="512" height="512" layout="responsive"></amp-img>
+      </amp-img>
     </a>
   {% endfor %}
         EOS

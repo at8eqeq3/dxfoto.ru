@@ -4,6 +4,7 @@ layout: default
 {% assign y = page.date | date: '%Y' %}
 {% assign m = page.date | date: '%m' %}
 {% assign d = page.date | date: '%Y-%m-%d' %}
+{% assign dk = page.date | date: '%Y/%m/%Y-%m-%d' %}
 {% assign exif = site.data.exif[y][m][d] %}
 {% if exif['ImageWidth'] %}
   {% assign fw = exif['ImageWidth'] %}
@@ -15,7 +16,9 @@ layout: default
   {% assign lh = 1536 %}
 {% endif %}
 <h1>{{ page.title }}&emsp;<small>(#{{ page.index }})</small></h1>
-<amp-img src="https://img.dxfoto.ru/l/{{ dk }}.webp" alt="{{ page.title }}" width="{{ lw }}" height="{{ lh }}" layout="responsive"></amp-img>
+<amp-img src="https://img.dxfoto.ru/l/{{ dk }}.webp" alt="{{ page.title }}" width="{{ lw }}" height="{{ lh }}" layout="responsive">
+  <amp-img fallback src="https://img.dxfoto.ru/l/{{ dk }}.jpg" alt="{{ page.title }}" width="{{ lw }}" height="{{ lh }}" layout="responsive"></amp-img>
+</amp-img>
 {{ content }}
 <div class="meta">
   <span class="author"><i class="material-icons md-18">face</i> {{ page.author }}</span>
