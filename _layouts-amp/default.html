@@ -5,7 +5,7 @@
     <title>
       {% if page.title %}
         {% unless page.type == 'archive' %}
-          {{ page.date | date: "%Y %m %d" }} •
+          {{ page.date | date: "%Y-%m-%d" }} •
         {% endunless %}
         {{ page.title }} •
       {% endif %}

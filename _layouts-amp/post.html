@@ -15,7 +15,7 @@ layout: default
   {% assign lh = 1536 %}
 {% endif %}
 <h1>{{ page.title }}&emsp;<small>(#{{ page.index }})</small></h1>
-<amp-img src="{% img_src l %}" alt="{{ page.title }}" width="{{ lw }}" height="{{ lh }}" layout="responsive"></amp-img>
+<amp-img src="https://img.dxfoto.ru/l/{{ dk }}.webp" alt="{{ page.title }}" width="{{ lw }}" height="{{ lh }}" layout="responsive"></amp-img>
 {{ content }}
 <div class="meta">
   <span class="author"><i class="material-icons md-18">face</i> {{ page.author }}</span>
@@ -33,10 +33,10 @@ layout: default
 </div>
 <div class="links">
   {% if page.previous %}
-    <div><i class="material-icons md-18">chevron_left</i> <a href="{{ page.previous.url }}">{{ page.previous.date | date: "%Y %m %d" }} &mdash; {{ page.previous.title }}</a></div>
+    <div><i class="material-icons md-18">chevron_left</i> <a href="{{ page.previous.url }}">{{ page.previous.date | date: "%Y-%m-%d" }} &mdash; {{ page.previous.title }}</a></div>
   {% endif %}
   {% if page.next %}
-    <div><i class="material-icons md-18">chevron_right</i> <a href="{{ page.next.url }}">{{ page.next.date | date: "%Y %m %d" }} &mdash; {{ page.next.title }}</a></div>
+    <div><i class="material-icons md-18">chevron_right</i> <a href="{{ page.next.url }}">{{ page.next.date | date: "%Y-%m-%d" }} &mdash; {{ page.next.title }}</a></div>
   {% endif %}
 </div>
 <script type="application/ld+json">
@@ -47,7 +47,7 @@ layout: default
     "datePublished" : "{{ page.date | date_to_xmlschema }}",
     "image": {
       "@type": "ImageObject",
-      "url": "{% img_src l %}",
+      "url": "https://img.dxfoto.ru/l/{{ dk }}.webp",
       "height": {{ lh }},
       "width": {{ lw }}
     },

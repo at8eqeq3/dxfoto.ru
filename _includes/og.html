@@ -8,7 +8,7 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="{{ page.title }}">
 <meta property="og:description" content="{{ page.content | markdownify | strip_html | xml_escape | strip }}">
-<meta property="og:image" content="{% img_src m %}">
+<meta property="og:image" content="https://img.dxfoto.ru/m/{{ dk }}.webp">
 <meta property="og:locale" content="ru_RU">
 <meta property="og:rich_attachment" content="true">
 <meta property="article:publisher" content="https://www.facebook.com/dxfoto.ru">
@@ -47,8 +47,8 @@
 {% endif %}
 <meta name="twitter:title" content="{{ page.title }}">
 <meta name="twitter:description" content="{{ page.content | markdownify | strip_html | | xml_escape | strip }}">
-<meta name="twitter:image" content="{% img_src m %}">
+<meta name="twitter:image" content="https://img.dxfoto.ru/m/{{ dk }}.webp">
 <!-- vk -->
 <meta name="title" content="{{ page.title }}">
 <meta name="description" content="{{ page.content | markdownify | strip_html | | xml_escape | strip }}">
-<link rel="image_src" href="{% img_src m %}">
+<link rel="image_src" href="https://img.dxfoto.ru/m/{{ dk }}.webp">

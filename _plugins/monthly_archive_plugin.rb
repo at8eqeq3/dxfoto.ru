@@ -60,8 +60,8 @@ module Jekyll
       if ENV['AMP'] == 'yes'
         self.content = <<-EOS
   {% for post in page.posts %}
-    <a href="{{ post.url }}" title="{{post.date | date: "%Y %m %d" }} • {{ post.title }}">
-      <amp-img src="https://img.dxfoto.ru/s/{{post.date | date: "%Y"}}/{{post.date | date: "%m"}}/{{post.date | date: "%Y-%m-%d"}}.jpg" alt="{{ post.title }}" width="512" height="512" layout="responsive"></amp-img>
+    <a href="{{ post.url }}" title="{{post.date | date: "%Y-%m-%d" }} • {{ post.title }}">
+      <amp-img src="https://img.dxfoto.ru/s/{{post.date | date: "%Y"}}/{{post.date | date: "%m"}}/{{post.date | date: "%Y-%m-%d"}}.webp" alt="{{ post.title }}" width="512" height="512" layout="responsive"></amp-img>
     </a>
   {% endfor %}
         EOS
@@ -69,8 +69,12 @@ module Jekyll
         self.content = <<-EOS
   {% for post in page.posts %}
     <div class="pure-u-12-24 pure-u-sm-8-24 pure-u-md-6-24 index-item">
-      <a href="{{ post.url }}" title="{{post.date | date: "%Y %m %d" }} • {{ post.title }}">
-        <img src="https://img.dxfoto.ru/s/{{post.date | date: "%Y"}}/{{post.date | date: "%m"}}/{{post.date | date: "%Y-%m-%d"}}.jpg" alt="{{ post.title }}" class="pure-img" />
+      <a href="{{ post.url }}" title="{{post.date | date: "%Y-%m-%d" }} • {{ post.title }}">
+        <picture class="pure-img">
+          <source srcset="https://img.dxfoto.ru/s/{{post.date | date: "%Y"}}/{{post.date | date: "%m"}}/{{post.date | date: "%Y-%m-%d"}}.webp" type="image/webp">
+          <source srcset="https://img.dxfoto.ru/s/{{post.date | date: "%Y"}}/{{post.date | date: "%m"}}/{{post.date | date: "%Y-%m-%d"}}.jpg" type="image/jpeg">
+          <img src="https://img.dxfoto.ru/s/{{post.date | date: "%Y"}}/{{post.date | date: "%m"}}/{{post.date | date: "%Y-%m-%d"}}.jpg" alt="{{ post.title }}" class="pure-img" />
+        </picture>
       </a>
     </div>
   {% endfor %}

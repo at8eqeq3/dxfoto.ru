@@ -20,7 +20,7 @@ module Jekyll
       return if page_date.nil?
 
       if %w[l m s].include? s
-        "https://img.dxfoto.ru/#{s}/#{page_date.strftime('%Y/%m/%Y-%m-%d')}.jpg"
+        "https://img.dxfoto.ru/#{s}/#{page_date.strftime('%Y/%m/%Y-%m-%d')}.webp"
       else
         "https://hd.dxfoto.ru/#{page_date.strftime('%Y/%m/%Y-%m-%d')}.jpg"
       end

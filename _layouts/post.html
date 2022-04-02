@@ -4,6 +4,7 @@ layout: default
 {% assign y = page.date | date: '%Y' %}
 {% assign m = page.date | date: '%m' %}
 {% assign d = page.date | date: '%Y-%m-%d' %}
+{% assign dk = page.date | date: '%Y/%m/%Y-%m-%d' %}
 {% assign exif = site.data.exif[y][m][d] %}
 <div itemscope itemtype="http://schema.org/Photograph">
   <div class="pure-g links">
@@ -43,7 +44,11 @@ layout: default
     {% else %}
       <div class="pure-u-1 checkers" style="position: relative;">
     {% endif %}
-      <img itemprop="image" src="{% img_src l %}" class="pure-img" alt="{{ page.title }}" />
+      <picture class="pure-img">
+        <source srcset="https://img.dxfoto.ru/l/{{ dk }}.webp" type="image/webp">
+        <source srcset="https://img.dxfoto.ru/l/{{ dk }}.jpg" type="image/jpeg">
+        <img itemprop="image" src="https://img.dxfoto.ru/l/{{ dk }}.jpg" class="pure-img" alt="{{ page.title }}" />
+      </picture>
       {% if page.previous %}
         <a class="img-nav img-nav-previous" href="{{ page.previous.url }}"></a>
       {% endif %}
@@ -139,10 +144,9 @@ layout: default
         <!-- <hr /> -->
         <div itemscope itemtype="http://schema.org/ImageObject">
           <i class="fa fa-cloud-download-alt"></i> Скачать:
-          <a href="{% img_src f %}">Исходный ({% image_size f %})*</a> |
-          <a itemprop="contentUrl" href="{% img_src l %}">{% image_size l %}</a> |
-          <a href="{% img_src m %}">{% image_size m %}</a> |
-          <a href="{% img_src s %}">{% image_size s %}</a> |
+          <a href="https://hd.dxfoto.ru/{{ dk }}.jpg">Исходный ({% image_size f %})*</a> |
+          <a itemprop="contentUrl" href="https://img.dxfoto.ru/l/{{ dk }}.jpg">JPEG</a> |
+          <a itemprop="contentUrl" href="https://img.dxfoto.ru/l/{{ dk }}.webp">WebP</a>
           <p><small>* "исходный" тут значит "такой, какой загружен в CDN", это не всегда соответствует наибольшему существующему размеру картинки.</small></p>
         </div>
       </div>
@@ -164,7 +168,7 @@ layout: default
     "url": "{{ site.url }}{{ page.url }}",
     "image": {
       "@type": "ImageObject",
-      "url": "{% img_src m %}"
+      "url": "https://img.dxfoto.ru/m/{{ dk }}.webp"
     },
     "publisher": {
       "@type": "Organization",

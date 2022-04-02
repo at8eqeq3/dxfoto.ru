@@ -80,10 +80,10 @@ layout: null
         ]]></turbo:content>
         <yandex:related>
           {% if post.previous %}
-            <link url="{{ post.previous.url }}" img="http://img.dxfoto.ru/s/{{post.previous.date | date: "%Y"}}/{{post.previous.date | date: "%m"}}/{{post.previous.date | date: "%Y-%m-%d"}}.jpg">{{ post.previous.date | date: "%Y %m %d" }} – {{ post.previous.title }}</link>
+            <link url="{{ post.previous.url }}" img="http://img.dxfoto.ru/s/{{post.previous.date | date: "%Y"}}/{{post.previous.date | date: "%m"}}/{{post.previous.date | date: "%Y-%m-%d"}}.jpg">{{ post.previous.date | date: "%Y-%m-%d" }} – {{ post.previous.title }}</link>
           {% endif %}
           {% if post.next %}
-            <link url="{{ post.next.url }}" img="http://img.dxfoto.ru/s/{{post.next.date | date: "%Y"}}/{{post.next.date | date: "%m"}}/{{post.next.date | date: "%Y-%m-%d"}}.jpg">{{ post.next.date | date: "%Y %m %d" }} – {{ post.next.title }}</link>
+            <link url="{{ post.next.url }}" img="http://img.dxfoto.ru/s/{{post.next.date | date: "%Y"}}/{{post.next.date | date: "%m"}}/{{post.next.date | date: "%Y-%m-%d"}}.jpg">{{ post.next.date | date: "%Y-%m-%d" }} – {{ post.next.title }}</link>
           {% endif %}
         </yandex:related>
       </item>
