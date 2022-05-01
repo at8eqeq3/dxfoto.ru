@@ -30,6 +30,7 @@ jobs:
             _amp
             _data/exif
             .jekyll-cache
+            .sass-cache
           restore-keys: |
             cachedata-
       - name: Sync metadata
