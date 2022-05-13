@@ -1,0 +1,22 @@
+---
+layout: post
+date: 2022-05-13 00:00:00.000000000 +03:00
+colors:
+- 631a1d
+- 220b0e
+shoot_date: 2022-05-05
+taxonomy:
+- plantae|tracheophyta|magnoliopsida|rosales|rosaceae|prunus|prunus cerasifera
+-
+title: Алыча
+author: Д.Г.
+location: Сочи
+tags:
+- растения
+- ягоды
+- слива
+- алыча
+gear:
+- 70D
+- Гелиос 44-2
+---
