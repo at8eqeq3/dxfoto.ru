@@ -20,6 +20,9 @@ exclude:
   - error-amp.html
   - robots-amp.txt
   - purge.sh
+  - today
+  - today.json
+  - new_post.rb
 kramdown:
   smart_quotes:   ldquo,rdquo,laquo,raquo
 plugins: [aws-sdk]
