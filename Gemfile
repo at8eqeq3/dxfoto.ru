@@ -8,5 +8,5 @@ group :desktop, optional: true do
   gem 'exifr', :require => 'exifr/jpeg'
   gem 'miro', git: 'https://github.com/jonbuda/miro.git'
   gem 'tty-prompt'
-  gem 'xmp'
+  gem 'xmp', git: 'https://github.com/at8eqeq3/xmp.git'
 end
