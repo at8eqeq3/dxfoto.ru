@@ -35,6 +35,7 @@ curdate = Time.now
 exif_gear = {
   camera: {
     'Canon EOS 70D' => '70D'
+    'E-3' => 'E-3'
   },
   lens: {
     'EF-S55-250mm f/4-5.6 IS STM' => '55-250mm'
