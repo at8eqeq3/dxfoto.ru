@@ -34,7 +34,7 @@ curdate = Time.now
 # fill with actual values
 exif_gear = {
   camera: {
-    'Canon EOS 70D' => '70D'
+    'Canon EOS 70D' => '70D',
     'E-3' => 'E-3'
   },
   lens: {
