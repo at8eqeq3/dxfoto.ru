@@ -85,8 +85,8 @@ if File.file? photo_file
   e = EXIFR::JPEG.new(photo_file)
   guess_date = e.date_time_original.to_date
   post_meta['shoot_date'] = prompt.ask('Уточним дату съёмки:', default: guess_date.strftime('%Y-%m-%d'), convert: :date)
-  guess_camera = exif_gear[:camera].key?(e.model.strip) ? exif_gear[:camera][e.model.strip] : nil
-  guess_lens = exif_gear[:lens].key?(e.lens_model.strip) ? exif_gear[:lens][e.lens_model.strip] : nil
+  guess_camera = exif_gear[:camera].key?(e.model) ? exif_gear[:camera][e.model.strip] : nil
+  guess_lens = exif_gear[:lens].key?(e.lens_model) ? exif_gear[:lens][e.lens_model.strip] : nil
 
   xmp = XMP.parse e
   taxonomy = []
