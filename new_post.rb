@@ -131,6 +131,12 @@ if File.file? photo_file
   current_branch = `git branch --show-current`.strip
   if current_branch == 'deploy-aerobatic'
     if prompt.yes?('Создадим пост?')
+      unless File.directory? File.join(SITE_ROOT, post_meta['date'].strftime('_posts/%Y')
+        Dir.mkdir File.join(SITE_ROOT, post_meta['date'].strftime('_posts/%Y')
+      end
+      unless File.directory? File.join(SITE_ROOT, post_meta['date'].strftime('_posts/%Y/%m')
+        Dir.mkdir File.join(SITE_ROOT, post_meta['date'].strftime('_posts/%Y/%m')
+      end
       post_file_path = File.join(SITE_ROOT, post_meta['date'].strftime('_posts/%Y/%m/%Y-%m-%d-post.md'))
       post_file = File.new(post_file_path, 'w')
       post_file.puts YAML.dump(post_meta)
