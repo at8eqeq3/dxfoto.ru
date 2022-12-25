@@ -10,7 +10,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
@@ -22,7 +22,7 @@ jobs:
           echo "::set-output name=datetime::$(/bin/date -u "+%Y%m%d%H%M")"
         shell: bash
       - name: Setup build cache
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           key: cachedata-${{ steps.get-datetime.outputs.datetime }}
           path: |
