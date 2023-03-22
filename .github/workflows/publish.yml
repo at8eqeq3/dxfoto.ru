@@ -71,3 +71,23 @@ jobs:
           CF_API_KEY: ${{ secrets.CF_API_KEY }}
         run: |
           curl -vvv -X POST "https://api.cloudflare.com/client/v4/zones/$CF_ZONE_ID/purge_cache" -H "Authorization: Bearer $CF_API_KEY" -H "Content-Type: application/json" --data '{"files": ["https://www.dxfoto.ru/", "https://amp.dxfoto.ru/", "https://www.dxfoto.ru/feed.xml", "https://img.dxfoto.ru/today.jpg"]}'
+      - name: Notify when success
+        uses: zulip/github-actions-zulip/send-message@v1
+        if: ${{ success() }}
+        with:
+          api-key: ${{ secrets.ZULIP_GHBOT_API_KEY }}
+          email: "kaop9VSKAwXiOePnRNOp7bMQ-bot@dxfoto-ru.zulipchat.com"
+          organization-url: "https://dxfoto-ru.zulipchat.com/"
+          to: "594647" # user_id
+          type: "private"
+          content: "Сайт собрался"
+      - name: Notify when success
+        uses: zulip/github-actions-zulip/send-message@v1
+        if: ${{ failure() }}
+        with:
+          api-key: ${{ secrets.ZULIP_GHBOT_API_KEY }}
+          email: "kaop9VSKAwXiOePnRNOp7bMQ-bot@dxfoto-ru.zulipchat.com"
+          organization-url: "https://dxfoto-ru.zulipchat.com/"
+          to: "594647" # user_id
+          type: "private"
+          content: "Сайт не собрался"
