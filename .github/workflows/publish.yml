@@ -7,7 +7,7 @@ on:
     branches: [ deploy-aerobatic ]
 
 jobs:
-  build:
+  build-main:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -49,7 +49,38 @@ jobs:
           AWS_EC2_METADATA_DISABLED: true
           AWS_ACCESS_KEY_ID: ${{ secrets.YC_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.YC_SECRET_ACCESS_KEY }}
-
+  build-amp:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.0'
+          bundler-cache: true
+      - name: Get date and time
+        id: get-datetime
+        run: |
+          echo "::set-output name=datetime::$(/bin/date -u "+%Y%m%d%H%M")"
+        shell: bash
+      - name: Setup build cache
+        uses: actions/cache@v3
+        with:
+          key: cachedata-${{ steps.get-datetime.outputs.datetime }}
+          path: |
+            _site
+            _amp
+            _data/exif
+            .jekyll-cache
+            .sass-cache
+          restore-keys: |
+            cachedata-
+      - name: Sync metadata
+        env:
+          AWS_EC2_METADATA_DISABLED: true
+          AWS_ACCESS_KEY_ID: ${{ secrets.YC_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.YC_SECRET_ACCESS_KEY }}
+        run: aws --endpoint-url=https://storage.yandexcloud.net s3 sync s3://meta-dxfoto-ru _data --quiet --exclude "logs/*"
       - name: Build AMP site
         env:
           AMP: yes
@@ -64,6 +95,11 @@ jobs:
           AWS_EC2_METADATA_DISABLED: true
           AWS_ACCESS_KEY_ID: ${{ secrets.YC_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.YC_SECRET_ACCESS_KEY }}
+  finalize:
+    runs-on: ubuntu-latest
+    if: ${{ always() }}
+    needs: ["build-main", "build-amp"]
+    steps:
       - name: Purge CF cache
         env:
           CF_ZONE_ID: ${{ secrets.CF_ZONE_ID }}
@@ -81,7 +117,7 @@ jobs:
           to: "594647" # user_id
           type: "private"
           content: "Сайт собрался"
-      - name: Notify when success
+      - name: Notify when failure
         uses: zulip/github-actions-zulip/send-message@v1
         if: ${{ failure() }}
         with:
