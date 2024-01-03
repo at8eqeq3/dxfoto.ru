@@ -38,7 +38,8 @@ exif_gear = {
     'E-3' => 'E-3'
   },
   lens: {
-    'EF-S55-250mm f/4-5.6 IS STM' => '55-250mm'
+    'EF-S55-250mm f/4-5.6 IS STM' => '55-250mm',
+    'Canon EF-S 35mm f/2.8 Macro IS STM' => '35mm macro LED'
   }
 }
 
@@ -55,6 +56,7 @@ gear = {
     '55-250mm',
     '40mm',
     '10-18mm',
+    '35mm macro LED',
     'Зенитар',
     'Индустар 50-2',
     'Гелиос 44-2',
