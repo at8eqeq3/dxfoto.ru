@@ -39,7 +39,7 @@ exif_gear = {
   },
   lens: {
     'EF-S55-250mm f/4-5.6 IS STM' => '55-250mm',
-    'Canon EF-S 35mm f/2.8 Macro IS STM' => '35mm macro LED'
+    'EF-S35mm f/2.8 MACRO IS STM' => '35mm macro LED'
   }
 }
 
