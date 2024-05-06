@@ -20,7 +20,7 @@ jobs:
         id: get-datetime
         run: |
           # echo "::set-output name=datetime::$(/bin/date -u "+%Y%m%d%H%M")"
-          echo "name=datetime::$(/bin/date -u "+%Y%m%d%H%M")" >> $GITHUB_OUTPUT
+          echo "datetime=$(/bin/date -u "+%Y%m%d%H%M")" >> $GITHUB_OUTPUT
         shell: bash
       - name: Setup build cache
         uses: actions/cache@v4
@@ -62,7 +62,8 @@ jobs:
       - name: Get date and time
         id: get-datetime
         run: |
-          echo "::set-output name=datetime::$(/bin/date -u "+%Y%m%d%H%M")"
+          # echo "::set-output name=datetime::$(/bin/date -u "+%Y%m%d%H%M")"
+          echo "datetime=$(/bin/date -u "+%Y%m%d%H%M")" >> $GITHUB_OUTPUT
         shell: bash
       - name: Setup build cache
         uses: actions/cache@v3
