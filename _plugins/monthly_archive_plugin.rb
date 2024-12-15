@@ -70,7 +70,7 @@ module Jekyll
       else
         self.content = <<-EOS
   {% for post in page.posts %}
-    <div class="pure-u-12-24 pure-u-sm-8-24 pure-u-md-6-24 index-item">
+    <div class="pure-u-12-24 pure-u-sm-8-24 pure-u-md-6-24 pure-u-lg-4-24 pure-u-xxxl-3-24 index-item">
       <a href="{{ post.url }}" title="{{post.date | date: "%Y-%m-%d" }} • {{ post.title }}">
         <picture class="pure-img">
           <source srcset="https://img.dxfoto.ru/s/{{post.date | date: "%Y"}}/{{post.date | date: "%m"}}/{{post.date | date: "%Y-%m-%d"}}.webp" type="image/webp">
