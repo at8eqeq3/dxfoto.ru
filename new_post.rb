@@ -40,7 +40,8 @@ exif_gear = {
   },
   lens: {
     'EF-S55-250mm f/4-5.6 IS STM' => '55-250mm',
-    'EF-S35mm f/2.8 MACRO IS STM' => '35mm macro LED'
+    'EF-S35mm f/2.8 MACRO IS STM' => '35mm macro LED',
+    '150-600mm F5-6.3 DG OS HSM | Contemporary 015' => '150-600mm'
   }
 }
 
@@ -59,6 +60,7 @@ gear = {
     '40mm',
     '10-18mm',
     '35mm macro LED',
+    '150-600mm',
     'Зенитар',
     'Индустар 50-2',
     'Гелиос 44-2',
