@@ -92,7 +92,7 @@ jobs:
           mv -f _amp/error-amp.html _amp/error.html
           mv -f _amp/robots-amp.txt _amp/robots.txt
       - name: Sync AMP site
-        run: aws --endpoint-url=https://storage.yandexcloud.net s3 sync _amp s3://amp.dxfoto.ru --quiet
+        run: aws --endpoint-url=https://storage.yandexcloud.net s3 sync _amp s3://amp.dxfoto.ru
         env:
           AWS_EC2_METADATA_DISABLED: true
           AWS_ACCESS_KEY_ID: ${{ secrets.YC_ACCESS_KEY_ID }}
