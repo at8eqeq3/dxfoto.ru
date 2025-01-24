@@ -84,11 +84,11 @@ jobs:
       - name: Sync metadata
         env:
           AWS_EC2_METADATA_DISABLED: true
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.YC_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.YC_SECRET_ACCESS_KEY }}
           AWS_REQUEST_CHECKSUM_CALCULATION: when_required
           AWS_REGION: ru-central1
-        run: AWS_REQUEST_CHECKSUM_CALCULATION=when_required AWS_REGION=ru-central1 AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID }} AWS_SECRET_ACCESS_KEY=${{ secrets.YC_SECRET_ACCESS_KEY }} aws --endpoint-url=https://storage.yandexcloud.net s3 sync s3://meta-dxfoto-ru _data  --exclude "logs/*"
+        run: AWS_REQUEST_CHECKSUM_CALCULATION=when_required AWS_REGION=ru-central1 AWS_ACCESS_KEY_ID=${{ secrets.YC_ACCESS_KEY_ID }} AWS_SECRET_ACCESS_KEY=${{ secrets.YC_SECRET_ACCESS_KEY }} aws --endpoint-url=https://storage.yandexcloud.net s3 sync s3://meta-dxfoto-ru _data  --exclude "logs/*"
       - name: Build AMP site
         env:
           AMP: yes
