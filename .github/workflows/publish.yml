@@ -8,7 +8,7 @@ on:
 
 jobs:
   build-main:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - name: Set up Ruby
@@ -37,8 +37,8 @@ jobs:
       - name: Sync metadata
         env:
           AWS_EC2_METADATA_DISABLED: true
-          AWS_ACCESS_KEY_ID: ${{ secrets.YC_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.YC_SECRET_ACCESS_KEY }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_REQUEST_CHECKSUM_CALCULATION: when_required
           AWS_REGION: ru-central1
         run: aws --endpoint-url=https://storage.yandexcloud.net s3 sync s3://meta-dxfoto-ru _data --quiet --exclude "logs/*"
@@ -50,8 +50,8 @@ jobs:
           aws --endpoint-url=https://storage.yandexcloud.net s3api put-bucket-website --bucket img.dxfoto.ru --website-configuration file://today.json
         env:
           AWS_EC2_METADATA_DISABLED: true
-          AWS_ACCESS_KEY_ID: ${{ secrets.YC_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.YC_SECRET_ACCESS_KEY }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_REQUEST_CHECKSUM_CALCULATION: when_required
           AWS_REGION: ru-central1
   build-amp:
@@ -84,11 +84,11 @@ jobs:
       - name: Sync metadata
         env:
           AWS_EC2_METADATA_DISABLED: true
-          AWS_ACCESS_KEY_ID: ${{ secrets.YC_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.YC_SECRET_ACCESS_KEY }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_REQUEST_CHECKSUM_CALCULATION: when_required
           AWS_REGION: ru-central1
-        run: AWS_REQUEST_CHECKSUM_CALCULATION=when_required AWS_REGION=ru-central1 AWS_ACCESS_KEY_ID=${{ secrets.YC_ACCESS_KEY_ID }} AWS_SECRET_ACCESS_KEY=${{ secrets.YC_SECRET_ACCESS_KEY }} aws --endpoint-url=https://storage.yandexcloud.net s3 sync s3://meta-dxfoto-ru _data  --exclude "logs/*"
+        run: aws --endpoint-url=https://storage.yandexcloud.net s3 sync s3://meta-dxfoto-ru _data --quiet --exclude "logs/*"
       - name: Build AMP site
         env:
           AMP: yes
@@ -98,11 +98,11 @@ jobs:
           mv -f _amp/error-amp.html _amp/error.html
           mv -f _amp/robots-amp.txt _amp/robots.txt
       - name: Sync AMP site
-        run: AWS_REQUEST_CHECKSUM_CALCULATION=when_required AWS_REGION=ru-central1 AWS_ACCESS_KEY_ID=${{ secrets.YC_ACCESS_KEY_ID }} AWS_SECRET_ACCESS_KEY=${{ secrets.YC_SECRET_ACCESS_KEY }} aws --endpoint-url=https://storage.yandexcloud.net s3 sync _amp s3://amp.dxfoto.ru
+        run: aws --endpoint-url=https://storage.yandexcloud.net s3 sync _amp s3://amp.dxfoto.ru --quiet
         env:
           AWS_EC2_METADATA_DISABLED: true
-          AWS_ACCESS_KEY_ID: ${{ secrets.YC_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.YC_SECRET_ACCESS_KEY }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_REQUEST_CHECKSUM_CALCULATION: when_required
           AWS_REGION: ru-central1
   finalize:
