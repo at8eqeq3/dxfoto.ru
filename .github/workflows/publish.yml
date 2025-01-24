@@ -39,7 +39,7 @@ jobs:
           AWS_EC2_METADATA_DISABLED: true
           AWS_ACCESS_KEY_ID: ${{ secrets.YC_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.YC_SECRET_ACCESS_KEY }}
-          AWS_SIGV4A_SIGNING_REGION_SET: qqq
+          AWS_REQUEST_CHECKSUM_CALCULATION: when_required
         run: aws --endpoint-url=https://storage.yandexcloud.net s3 sync s3://meta-dxfoto-ru _data --quiet --exclude "logs/*"
       - name: Build main site
         run: bundle exec jekyll build -I
@@ -51,7 +51,7 @@ jobs:
           AWS_EC2_METADATA_DISABLED: true
           AWS_ACCESS_KEY_ID: ${{ secrets.YC_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.YC_SECRET_ACCESS_KEY }}
-          AWS_SIGV4A_SIGNING_REGION_SET: qqq
+          AWS_REQUEST_CHECKSUM_CALCULATION: when_required
   build-amp:
     runs-on: ubuntu-latest
     steps:
@@ -84,7 +84,7 @@ jobs:
           AWS_EC2_METADATA_DISABLED: true
           AWS_ACCESS_KEY_ID: ${{ secrets.YC_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.YC_SECRET_ACCESS_KEY }}
-          AWS_SIGV4A_SIGNING_REGION_SET: qqq
+          AWS_REQUEST_CHECKSUM_CALCULATION: when_required
         run: aws --endpoint-url=https://storage.yandexcloud.net s3 sync s3://meta-dxfoto-ru _data --quiet --exclude "logs/*"
       - name: Build AMP site
         env:
@@ -100,7 +100,7 @@ jobs:
           AWS_EC2_METADATA_DISABLED: true
           AWS_ACCESS_KEY_ID: ${{ secrets.YC_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.YC_SECRET_ACCESS_KEY }}
-          AWS_SIGV4A_SIGNING_REGION_SET: qqq
+          AWS_REQUEST_CHECKSUM_CALCULATION: when_required
   finalize:
     runs-on: ubuntu-latest
     if: ${{ always() }}
