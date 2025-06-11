@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'aws-sdk', '~> 3'
-gem 'jekyll', '~> 4.3.1'
+gem 'jekyll', '~> 4.4.1'
 gem 'kramdown-parser-gfm'
 
 group :desktop, optional: true do
