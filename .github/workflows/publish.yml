@@ -54,61 +54,63 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_REQUEST_CHECKSUM_CALCULATION: when_required
           AWS_REGION: ru-central1
-  build-amp:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - name: Set up Ruby
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: '3.0'
-          bundler-cache: true
-      - name: Get date and time
-        id: get-datetime
-        run: |
-          # echo "::set-output name=datetime::$(/bin/date -u "+%Y%m%d%H%M")"
-          echo "datetime=$(/bin/date -u "+%Y%m%d%H%M")" >> $GITHUB_OUTPUT
-        shell: bash
-      - name: Setup build cache
-        uses: actions/cache@v3
-        with:
-          key: cachedata-${{ steps.get-datetime.outputs.datetime }}
-          path: |
-            _site
-            _amp
-            _data/exif
-            .jekyll-cache
-            .sass-cache
-          restore-keys: |
-            cachedata-
-      - name: Sync metadata
-        env:
-          AWS_EC2_METADATA_DISABLED: true
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          AWS_REQUEST_CHECKSUM_CALCULATION: when_required
-          AWS_REGION: ru-central1
-        run: aws --endpoint-url=https://storage.yandexcloud.net s3 sync s3://meta-dxfoto-ru _data --quiet --exclude "logs/*"
-      - name: Build AMP site
-        env:
-          AMP: yes
-        run: |
-          AMP=yes bundle exec jekyll build -I --config _config-amp.yml
-          mv -f _amp/index-amp.html _amp/index.html
-          mv -f _amp/error-amp.html _amp/error.html
-          mv -f _amp/robots-amp.txt _amp/robots.txt
-      - name: Sync AMP site
-        run: aws --endpoint-url=https://storage.yandexcloud.net s3 sync _amp s3://amp.dxfoto.ru --quiet
-        env:
-          AWS_EC2_METADATA_DISABLED: true
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          AWS_REQUEST_CHECKSUM_CALCULATION: when_required
-          AWS_REGION: ru-central1
+  # build-amp:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v3
+  #     - name: Set up Ruby
+  #       uses: ruby/setup-ruby@v1
+  #       with:
+  #         ruby-version: '3.0'
+  #         bundler-cache: true
+  #     - name: Get date and time
+  #       id: get-datetime
+  #       run: |
+  #         # echo "::set-output name=datetime::$(/bin/date -u "+%Y%m%d%H%M")"
+  #         echo "datetime=$(/bin/date -u "+%Y%m%d%H%M")" >> $GITHUB_OUTPUT
+  #       shell: bash
+  #     - name: Setup build cache
+  #       uses: actions/cache@v3
+  #       with:
+  #         key: cachedata-${{ steps.get-datetime.outputs.datetime }}
+  #         path: |
+  #           _site
+  #           _amp
+  #           _data/exif
+  #           .jekyll-cache
+  #           .sass-cache
+  #         restore-keys: |
+  #           cachedata-
+  #     - name: Sync metadata
+  #       env:
+  #         AWS_EC2_METADATA_DISABLED: true
+  #         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+  #         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+  #         AWS_REQUEST_CHECKSUM_CALCULATION: when_required
+  #         AWS_REGION: ru-central1
+  #       run: aws --endpoint-url=https://storage.yandexcloud.net s3 sync s3://meta-dxfoto-ru _data --quiet --exclude "logs/*"
+  #     - name: Build AMP site
+  #       env:
+  #         AMP: yes
+  #       run: |
+  #         AMP=yes bundle exec jekyll build -I --config _config-amp.yml
+  #         mv -f _amp/index-amp.html _amp/index.html
+  #         mv -f _amp/error-amp.html _amp/error.html
+  #         mv -f _amp/robots-amp.txt _amp/robots.txt
+  #     - name: Sync AMP site
+  #       run: aws --endpoint-url=https://storage.yandexcloud.net s3 sync _amp s3://amp.dxfoto.ru --quiet
+  #       env:
+  #         AWS_EC2_METADATA_DISABLED: true
+  #         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+  #         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+  #         AWS_REQUEST_CHECKSUM_CALCULATION: when_required
+  #         AWS_REGION: ru-central1
   finalize:
     runs-on: ubuntu-latest
     if: ${{ always() }}
-    needs: ["build-main", "build-amp"]
+    #needs: ["build-main", "build-amp"]
+    needs:
+      - "build-main"
     steps:
       - name: Purge CF cache
         env:

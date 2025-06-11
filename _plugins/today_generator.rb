@@ -25,6 +25,17 @@ module Jekyll
         "Protocol": "https",
         "ReplaceKeyWith": "l/#{date}.jpg"
       }
+    },
+    {
+      "Condition": {
+        "KeyPrefixEquals": "today.webp"
+      },
+      "Redirect": {
+        "HostName": "img.dxfoto.ru",
+        "HttpRedirectCode": "301",
+        "Protocol": "https",
+        "ReplaceKeyWith": "l/#{date}.webp"
+      }
     }
   ]
 }
