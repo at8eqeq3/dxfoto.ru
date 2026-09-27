@@ -9,10 +9,10 @@ module Jekyll
       data = <<-TODAY
 {
   "ErrorDocument": {
-    "Key": "index.html"
+    "Key": "error.html"
   },
   "IndexDocument": {
-    "Suffix": "error.html"
+    "Suffix": "index.html"
   },
   "RoutingRules": [
     {
