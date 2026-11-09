@@ -47,17 +47,17 @@ layout: null
         <media:rating scheme="urn:simple">nonadult</media:rating>
         <media:content type="image/jpeg"
                        medium="image"
-                       url="http://img.dxfoto.ru/m/{{post.date | date: "%Y"}}/{{post.date | date: "%m"}}/{{post.date | date: "%Y-%m-%d"}}.jpg">
+                       url="https://img.dxfoto.ru/m/{{post.date | date: "%Y"}}/{{post.date | date: "%m"}}/{{post.date | date: "%Y-%m-%d"}}.jpg">
           <media:description type="plain">{{ post.title | xml_escape }}</media:description>
           <media:copyright>{{ license }} {{ post.author }} / dxfoto.ru</media:copyright>
         </media:content>
-        <enclosure url="http://img.dxfoto.ru/m/{{post.date | date: "%Y"}}/{{post.date | date: "%m"}}/{{post.date | date: "%Y-%m-%d"}}.jpg" type="image/jpeg" length="0" />
+        <enclosure url="https://img.dxfoto.ru/m/{{post.date | date: "%Y"}}/{{post.date | date: "%m"}}/{{post.date | date: "%Y-%m-%d"}}.jpg" type="image/jpeg" length="0" />
         <description><![CDATA[
 {{ post.content | markdownify | strip_html | xml_escape }}
         ]]></description>
         <content:encoded><![CDATA[
           <figure>
-            <img src="http://img.dxfoto.ru/m/{{post.date | date: "%Y"}}/{{post.date | date: "%m"}}/{{post.date | date: "%Y-%m-%d"}}.jpg" />
+            <img src="https://img.dxfoto.ru/m/{{post.date | date: "%Y"}}/{{post.date | date: "%m"}}/{{post.date | date: "%Y-%m-%d"}}.jpg" />
             <figcaption>
               {{ post.title | xml_escape }}
               <span class="copyright">({{ license }} {{ post.author }} / dxfoto.ru)</span>
@@ -70,7 +70,7 @@ layout: null
             <h1>{{ post.title | xml_escape }}</h1>
           </header>
           <figure>
-            <img src="http://img.dxfoto.ru/m/{{post.date | date: "%Y"}}/{{post.date | date: "%m"}}/{{post.date | date: "%Y-%m-%d"}}.jpg" />
+            <img src="https://img.dxfoto.ru/m/{{post.date | date: "%Y"}}/{{post.date | date: "%m"}}/{{post.date | date: "%Y-%m-%d"}}.jpg" />
             <figcaption>
               {{ post.title | xml_escape }}
               <span class="copyright">({{ license }} {{ post.author }} / dxfoto.ru)</span>
@@ -80,10 +80,10 @@ layout: null
         ]]></turbo:content>
         <yandex:related>
           {% if post.previous %}
-            <link url="{{ post.previous.url }}" img="http://img.dxfoto.ru/s/{{post.previous.date | date: "%Y"}}/{{post.previous.date | date: "%m"}}/{{post.previous.date | date: "%Y-%m-%d"}}.jpg">{{ post.previous.date | date: "%Y-%m-%d" }} – {{ post.previous.title }}</link>
+            <link url="{{ post.previous.url }}" img="https://img.dxfoto.ru/s/{{post.previous.date | date: "%Y"}}/{{post.previous.date | date: "%m"}}/{{post.previous.date | date: "%Y-%m-%d"}}.jpg">{{ post.previous.date | date: "%Y-%m-%d" }} – {{ post.previous.title }}</link>
           {% endif %}
           {% if post.next %}
-            <link url="{{ post.next.url }}" img="http://img.dxfoto.ru/s/{{post.next.date | date: "%Y"}}/{{post.next.date | date: "%m"}}/{{post.next.date | date: "%Y-%m-%d"}}.jpg">{{ post.next.date | date: "%Y-%m-%d" }} – {{ post.next.title }}</link>
+            <link url="{{ post.next.url }}" img="https://img.dxfoto.ru/s/{{post.next.date | date: "%Y"}}/{{post.next.date | date: "%m"}}/{{post.next.date | date: "%Y-%m-%d"}}.jpg">{{ post.next.date | date: "%Y-%m-%d" }} – {{ post.next.title }}</link>
           {% endif %}
         </yandex:related>
       </item>
